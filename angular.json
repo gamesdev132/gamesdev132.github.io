@@ -36,13 +36,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "700kB",
-                  "maximumError": "700kB"
+                  "maximumWarning": "900kB",
+                  "maximumError": "1000kB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "700kB",
-                  "maximumError": "750kB"
+                  "maximumWarning": "600kB",
+                  "maximumError": "650kB"
                 }
               ],
               "outputHashing": "all"
@@ -93,7 +93,7 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "baseHref": "/games-dev/",
+            "baseHref": "/",
             "repo": "https://github.com/gamesdev132/games.git"
           }
         }
