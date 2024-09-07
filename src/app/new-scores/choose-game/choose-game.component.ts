@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { DropdownModule } from "primeng/dropdown";
-import { GameEnum } from "../../@shared/enums/game";
 import { FormsModule } from "@angular/forms";
+import { GameEnum } from "app/@shared/enums/game";
+import { DropdownModule } from "primeng/dropdown";
 import { TrioGameComponent } from "../trio-game/trio-game.component";
 
 @Component({

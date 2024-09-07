@@ -1,7 +1,7 @@
 import { FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
-import { Trio } from "../../@shared/interface/trio";
+import { Trio } from "app/@shared/interface/trio";
+import { TrioPlayer } from "app/@shared/interface/trioPlayer";
 import { Timestamp } from "firebase/firestore";
-import { Player } from "../../@shared/interface/player";
 
 export class TrioGameHelper {
   private form!: FormGroup;
@@ -41,11 +41,11 @@ export class TrioGameHelper {
   }
 
   formatForAPI(): Trio {
-    const players: Player[] = this.form.get('players')?.value as Player[] ?? []
+    const players: TrioPlayer[] = this.form.get('players')?.value as TrioPlayer[] ?? []
 
     return {
-      players: players.map((player: Player) => player.name),
-      winner: players.find((player: Player) => player.win)?.name ?? '',
+      players: players.map((player: TrioPlayer) => player.name),
+      winner: players.find((player: TrioPlayer) => player.win)?.name ?? '',
       date: Timestamp.now()
     }
   }

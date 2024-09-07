@@ -1,13 +1,15 @@
 <form [formGroup]="form" (ngSubmit)="saveGame()">
   <div formArrayName="players" class="players">
-    @for (player of players.controls; let idx = $index; track player) {
-      <div class="player" [formGroupName]="idx">
-        <input pInputText formControlName="name" placeholder="Player Name"/>
+    @for (player of players.controls; let i = $index; track player) {
+      <div class="player" [formGroupName]="i">
+        <input pInputText formControlName="name" placeholder="TrioPlayer Name"/>
         <p-button [icon]="player.get('win')?.value ? 'pi pi-thumbs-up-fill' : 'pi pi-thumbs-down-fill'"
-                  (click)="toggleWin(idx)"></p-button>
+                  (click)="toggleWin(i)"></p-button>
       </div>
     }
   </div>
-  <p-button icon="pi pi-user-plus" type="button" (click)="addPlayer()" label="Ajouter un joueur"/>
+  @if(playersLength < 7){
+    <p-button icon="pi pi-user-plus" type="button" (click)="addPlayer()" label="Ajouter un joueur"/>
+  }
   <p-button icon="pi pi-save" type="submit" label="Enregistrer"/>
 </form>

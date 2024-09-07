@@ -1,4 +1,4 @@
-export interface Player {
+export interface TrioPlayer {
   name: string;
   win: boolean;
 }

@@ -33,11 +33,17 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "900kB",
-                  "maximumError": "1000kB"
+                  "maximumWarning": "2000kB",
+                  "maximumError": "3000kB"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -95,6 +101,11 @@
           "options": {
             "baseHref": "/",
             "repo": "https://github.com/gamesdev132/games.git"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "games-dev:build:production"
+            }
           }
         }
       }

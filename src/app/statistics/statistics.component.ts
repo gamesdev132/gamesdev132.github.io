@@ -1,12 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormsModule } from "@angular/forms";
 import { CardModule } from 'primeng/card';
 import { DropdownModule } from "primeng/dropdown";
-import { FormsModule } from "@angular/forms";
-import { TrioService } from "../@shared/services/trio.service";
-interface City {
-  name: string;
-  code: string;
-}
+
 @Component({
   selector: 'app-statistics',
   standalone: true,
@@ -14,5 +10,5 @@ interface City {
   templateUrl: './statistics.component.html',
   styleUrl: './statistics.component.css'
 })
-export class StatisticsComponent{
+export class StatisticsComponent {
 }

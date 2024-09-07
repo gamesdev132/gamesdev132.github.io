@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { InputTextModule } from "primeng/inputtext";
 import { FormArray, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { Button } from "primeng/button";
-import { TrioService } from "../../@shared/services/trio.service";
-import { TrioGameHelper } from "./trio-game.helper";
 import { Router } from "@angular/router";
+import { TrioService } from "app/@shared/services/trio.service";
+import { Button } from "primeng/button";
+import { InputTextModule } from "primeng/inputtext";
+import { TrioGameHelper } from "./trio-game.helper";
 
 @Component({
   selector: 'app-trio-game',

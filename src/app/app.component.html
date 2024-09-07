@@ -2,12 +2,12 @@
   <div class="flex justify-between">
     <div>
       @for (item of items; track item.label) {
-        <a [routerLink]="item.routerLink">
+        <a [routerLink]="item.routerLink" class="p-button font-bold">
           <span class="ml-2">{{ item.label }}</span>
         </a>
       }
     </div>
-    <a [routerLink]="'/addScores'">
+    <a [routerLink]="'/addScores'" class="p-button font-bold">
       <span class="ml-2">Ajouter</span>
     </a>
   </div>
