@@ -1,17 +1,18 @@
 <header>
-  <div class="flex justify-between">
-    <div>
-      @for (item of items; track item.label) {
-        <a [routerLink]="item.routerLink" class="p-button font-bold">
-          <span class="ml-2">{{ item.label }}</span>
-        </a>
-      }
-    </div>
-    <a [routerLink]="'/addScores'" class="p-button font-bold">
-      <span class="ml-2">Ajouter</span>
-    </a>
+  <div class="links justify-center">
+    @for (item of items; track item.label) {
+      <a [routerLink]="item.routerLink" class="menu-link" routerLinkActive="active-link"
+         [routerLinkActiveOptions]="{ exact: true }">
+        <span class="ml-2">{{ item.label }}</span>
+      </a>
+    }
   </div>
 </header>
 <main>
   <router-outlet/>
+  @if (showAddButton) {
+    <a [routerLink]="'/addScores'" class="pi pi-plus p-button p-button-icon add-button"
+       title="Enregistrer des scores">
+    </a>
+  }
 </main>

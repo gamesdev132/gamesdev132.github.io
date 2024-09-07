@@ -1,6 +1,6 @@
 import { NgClass } from "@angular/common";
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { MegaMenuItem } from "primeng/api";
 import { MegaMenuModule } from "primeng/megamenu";
 import { NewGameScoresComponent } from "./new-scores/new-game-scores/new-game-scores.component";
@@ -17,6 +17,9 @@ import { StatisticsComponent } from "./statistics/statistics.component";
 export class AppComponent implements OnInit {
   items: MegaMenuItem[] | undefined;
 
+  constructor(private router: Router) {
+  }
+
   ngOnInit(): void {
     this.items = [
       {
@@ -30,5 +33,9 @@ export class AppComponent implements OnInit {
         routerLink: '/scores'
       },
     ];
+  }
+
+  get showAddButton(): boolean {
+    return this.router.url !== '/addScores'
   }
 }

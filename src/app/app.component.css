@@ -1,11 +1,37 @@
-.flex {
-  display: flex;
-}
-
-.justify-between {
-  justify-content: space-between;
-}
-
-main{
+main {
   max-height: 100vh;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.menu-link {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  font-weight: 600;
+  font-size: 1.125rem;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  color: black;
+}
+
+.add-button {
+  color: white;
+  text-decoration: none;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  cursor: pointer;
+}
+
+.active-link {
+  background: #dbecff;
 }
