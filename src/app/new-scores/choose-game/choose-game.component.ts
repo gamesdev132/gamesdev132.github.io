@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { GameEnum } from "app/@shared/enums/game";
+import { RoundScoresGameComponent } from "app/new-scores/round-scores-game/round-scores-game.component";
 import { DropdownModule } from "primeng/dropdown";
 import { TrioGameComponent } from "../trio-game/trio-game.component";
 
@@ -10,7 +11,8 @@ import { TrioGameComponent } from "../trio-game/trio-game.component";
   imports: [
     FormsModule,
     DropdownModule,
-    TrioGameComponent
+    TrioGameComponent,
+    RoundScoresGameComponent
   ],
   templateUrl: './choose-game.component.html',
   styleUrl: './choose-game.component.css'

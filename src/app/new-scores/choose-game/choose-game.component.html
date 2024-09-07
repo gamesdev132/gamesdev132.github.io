@@ -1,12 +1,21 @@
-@if(!selectedGame){
-<div class="align-select">
-<p-dropdown
-  [(ngModel)]="selectedGame"
-  [options]="gameList"
-  [style]="{width: '200px'}"
-  placeholder="Jeu">
-</p-dropdown>
-</div>
-} @else if (selectedGame === GameEnum.Trio){
-  <app-trio-game></app-trio-game>
+@switch (selectedGame) {
+  @case (GameEnum.Trio) {
+    <app-trio-game></app-trio-game>
+  }
+  @case (GameEnum.Hilo) {
+    <app-round-scores-game></app-round-scores-game>
+  }
+  @case (GameEnum.SixQuiPrend) {
+    <app-round-scores-game></app-round-scores-game>
+  }
+  @default {
+    <div class="align-select">
+      <p-dropdown
+        [(ngModel)]="selectedGame"
+        [options]="gameList"
+        [style]="{width: '200px'}"
+        placeholder="Jeu">
+      </p-dropdown>
+    </div>
+  }
 }
