@@ -1,11 +1,11 @@
-html, body {
-  height: 100%;
-}
-
 .flex {
   display: flex;
 }
 
 .justify-between {
   justify-content: space-between;
+}
+
+main{
+  max-height: 100vh;
 }

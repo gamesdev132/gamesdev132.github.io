@@ -1,4 +1,4 @@
-<main class="main">
+<header>
   <div class="flex justify-between">
     <div>
       @for (item of items; track item.label) {
@@ -11,5 +11,7 @@
       <span class="ml-2">Ajouter</span>
     </a>
   </div>
+</header>
+<main>
+  <router-outlet/>
 </main>
-<router-outlet/>

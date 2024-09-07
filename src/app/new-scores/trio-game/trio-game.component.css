@@ -11,6 +11,10 @@
   gap: 5px;
 }
 
+.p-button-icon-only {
+  background: red;
+}
+
 .winner-button {
   padding-left: 10px;
 }
@@ -19,8 +23,14 @@
   display: flex;
 }
 
+.players-actions {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .save-button {
   display: flex;
   justify-content: flex-end;
-  margin-right: 25px;
+  padding: 0 1rem 1rem 0;
 }

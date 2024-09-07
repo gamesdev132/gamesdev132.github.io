@@ -1,10 +1,10 @@
+import { NgClass } from "@angular/common";
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { MegaMenuItem } from "primeng/api";
+import { MegaMenuModule } from "primeng/megamenu";
 import { NewGameScoresComponent } from "./new-scores/new-game-scores/new-game-scores.component";
 import { StatisticsComponent } from "./statistics/statistics.component";
-import { MegaMenuModule } from "primeng/megamenu";
-import { MegaMenuItem } from "primeng/api";
-import { NgClass } from "@angular/common";
 
 @Component({
   selector: 'app-root',
@@ -14,10 +14,10 @@ import { NgClass } from "@angular/common";
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   items: MegaMenuItem[] | undefined;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.items = [
       {
         label: 'Statistiques',

@@ -1,6 +1,8 @@
+import { NgClass } from "@angular/common";
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { AbstractControl, FormArray, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Router } from "@angular/router";
+import { TrioPlayer } from "app/@shared/interface/trioPlayer";
 import { TrioService } from "app/@shared/services/trio.service";
 import { Button } from "primeng/button";
 import { InputTextModule } from "primeng/inputtext";
@@ -9,7 +11,7 @@ import { TrioGameHelper } from "./trio-game.helper";
 @Component({
   selector: 'app-trio-game',
   standalone: true,
-  imports: [FormsModule, InputTextModule, Button, ReactiveFormsModule],
+  imports: [FormsModule, InputTextModule, Button, ReactiveFormsModule, NgClass],
   templateUrl: './trio-game.component.html',
   styleUrl: './trio-game.component.css'
 })
@@ -35,12 +37,24 @@ export class TrioGameComponent implements OnInit {
     return this.players.controls.length;
   }
 
+  get disablePlayerAdding(): boolean {
+    return this.players.controls.length === 7 || this.form.invalid;
+  }
+
+  get disablePlayerRemoving(): boolean {
+    return this.players.controls.length === 3 || !this.players.value.find((player: TrioPlayer) => !player.name);
+  }
+
+  get isFormDisabled(): boolean {
+    return this.form.invalid || !this.players.value.find((player: TrioPlayer) => player.win)
+  }
+
   toggleWin(index: number): void {
-    this.players.controls.forEach((entity, idx) => {
-      const winControl = entity.get('win');
+    this.players.controls.forEach((player: AbstractControl<any>, i: number): void => {
+      const winControl = player.get('win');
 
       if (winControl) {
-        if (idx === index) {
+        if (i === index) {
           winControl.setValue(!winControl.value);
         } else {
           winControl.setValue(false)
@@ -51,6 +65,10 @@ export class TrioGameComponent implements OnInit {
 
   addPlayer(): void {
     this.formHelper.addPlayer()
+  }
+
+  removePlayer(): void {
+    this.formHelper.removePlayer()
   }
 
   async saveGame(): Promise<void> {

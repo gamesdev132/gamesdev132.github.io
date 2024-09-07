@@ -2,14 +2,19 @@
   <div formArrayName="players" class="players">
     @for (player of players.controls; let i = $index; track player) {
       <div class="player" [formGroupName]="i">
-        <input pInputText formControlName="name" placeholder="TrioPlayer Name"/>
+        <input pInputText formControlName="name" placeholder="Nom du joueur"/>
         <p-button [icon]="player.get('win')?.value ? 'pi pi-thumbs-up-fill' : 'pi pi-thumbs-down-fill'"
-                  (click)="toggleWin(i)"></p-button>
+                  (click)="toggleWin(i)" outlined></p-button>
       </div>
     }
+    <div class="players-actions">
+      <p-button icon="pi pi-user-minus" outlined (click)="removePlayer()"
+                [disabled]="disablePlayerRemoving" title="Supprimer un joueur"/>
+      <p-button icon="pi pi-user-plus" outlined (click)="addPlayer()"
+                [disabled]="disablePlayerAdding" title="Ajouter un joueur"/>
+    </div>
   </div>
-  @if(playersLength < 7){
-    <p-button icon="pi pi-user-plus" type="button" (click)="addPlayer()" label="Ajouter un joueur"/>
-  }
-  <p-button icon="pi pi-save" type="submit" label="Enregistrer"/>
+  <div class="save-button">
+    <p-button icon="pi pi-save" type="submit" label="Enregistrer" [disabled]="isFormDisabled"/>
+  </div>
 </form>

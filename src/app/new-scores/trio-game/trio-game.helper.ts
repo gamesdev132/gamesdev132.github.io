@@ -34,8 +34,9 @@ export class TrioGameHelper {
     }
   }
 
-  removePlayer(index: number): void {
+  removePlayer(): void {
     if (this.players.length > 3) {
+      const index: number = (this.players?.value as TrioPlayer[]).findIndex((player: TrioPlayer) => !player.name)
       this.players.removeAt(index);
     }
   }
