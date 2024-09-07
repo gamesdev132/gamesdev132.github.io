@@ -1,7 +1,11 @@
-.flex{
-  display:flex;
+html, body {
+  height: 100%;
 }
 
-.justify-between{
+.flex {
+  display: flex;
+}
+
+.justify-between {
   justify-content: space-between;
 }

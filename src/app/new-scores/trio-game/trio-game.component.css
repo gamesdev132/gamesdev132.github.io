@@ -1,0 +1,26 @@
+.players {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.player {
+  display: flex;
+  gap: 5px;
+}
+
+.winner-button {
+  padding-left: 10px;
+}
+
+.player-field {
+  display: flex;
+}
+
+.save-button {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 25px;
+}

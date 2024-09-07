@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NewGameScoresComponent } from "./new-game-scores/new-game-scores.component";
+import { NewGameScoresComponent } from "./new-scores/new-game-scores/new-game-scores.component";
 import { StatisticsComponent } from "./statistics/statistics.component";
 import { MegaMenuModule } from "primeng/megamenu";
 import { MegaMenuItem } from "primeng/api";

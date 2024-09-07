@@ -14,19 +14,5 @@ interface City {
   templateUrl: './statistics.component.html',
   styleUrl: './statistics.component.css'
 })
-export class StatisticsComponent implements OnInit{
-  cities: City[] | undefined;
-
-  constructor(private trioService: TrioService) {}
-
-  async ngOnInit() {
-    console.log('trio', await this.trioService.getGamesFromLastXDays(-31));
-    this.cities = [
-      { name: 'New York', code: 'NY' },
-      { name: 'Rome', code: 'RM' },
-      { name: 'London', code: 'LDN' },
-      { name: 'Istanbul', code: 'IST' },
-      { name: 'Paris', code: 'PRS' }
-    ];
-  }
+export class StatisticsComponent{
 }
