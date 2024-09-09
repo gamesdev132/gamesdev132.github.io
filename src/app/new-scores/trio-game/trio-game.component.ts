@@ -4,21 +4,29 @@ import { AbstractControl, FormArray, FormGroup, FormsModule, ReactiveFormsModule
 import { Router } from "@angular/router";
 import { TrioPlayer } from "app/@shared/interface/trioPlayer";
 import { TrioService } from "app/@shared/services/trio.service";
-import { Button } from "primeng/button";
+import { ConfirmationService, MessageService } from "primeng/api";
+import { ButtonModule } from "primeng/button";
+import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { InputTextModule } from "primeng/inputtext";
+import { ToastModule } from "primeng/toast";
 import { TrioGameHelper } from "./trio-game.helper";
 
 @Component({
   selector: 'app-trio-game',
   standalone: true,
-  imports: [FormsModule, InputTextModule, Button, ReactiveFormsModule, NgClass],
+  imports: [FormsModule, InputTextModule, ButtonModule, ReactiveFormsModule, NgClass, ConfirmDialogModule, ToastModule],
+  providers: [ConfirmationService, MessageService],
   templateUrl: './trio-game.component.html',
-  styleUrl: './trio-game.component.css'
+  styleUrl: './trio-game.component.css',
 })
 export class TrioGameComponent implements OnInit {
   formHelper!: TrioGameHelper;
 
-  constructor(private trioService: TrioService, private router: Router) {
+  constructor(
+    private trioService: TrioService,
+    private router: Router,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService) {
   }
 
   ngOnInit(): void {
@@ -31,10 +39,6 @@ export class TrioGameComponent implements OnInit {
 
   get form(): FormGroup {
     return this.formHelper.getForm();
-  }
-
-  get playersLength(): number {
-    return this.players.controls.length;
   }
 
   get disablePlayerAdding(): boolean {
@@ -71,9 +75,41 @@ export class TrioGameComponent implements OnInit {
     this.formHelper.removePlayer()
   }
 
-  async saveGame(): Promise<void> {
-    await this.trioService.saveGame(this.formHelper.formatForAPI()).then((): void => {
-      this.router.navigate(['/'])
+  saveGame(event: Event): void {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      header: "Confirmer",
+      message: 'Voulez-vous enregistrer les scores ?',
+      icon: 'none',
+      acceptIcon: "none",
+      rejectIcon: "none",
+      acceptLabel: "Enregistrer",
+      rejectLabel: "Annuler",
+      rejectButtonStyleClass: "p-button-text",
+      accept: async (): Promise<void> => {
+        await this.trioService.saveGame(this.formHelper.formatForAPI()).then((): void => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Succès',
+            detail: 'Résultats enregistrés',
+            key: 'br',
+            life: 3000
+          });
+          //this.router.navigate(['/'])
+        }).catch((): void => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erreur',
+            detail: 'Un problème est survenu',
+            key: 'br',
+            life: 3000
+          });
+        })
+      },
+      reject: (): void => {
+        this.confirmationService.close();
+      }
     })
+
   }
 }

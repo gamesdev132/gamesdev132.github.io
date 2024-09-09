@@ -1,4 +1,6 @@
-<form [formGroup]="form" (ngSubmit)="saveGame()">
+<p-confirmDialog/>
+<p-toast [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }" position="bottom-right" key="br"/>
+<form [formGroup]="form" (ngSubmit)="saveGame($event)">
   <div formArrayName="players" class="players">
     @for (player of players.controls; let i = $index; track player) {
       <div class="player" [formGroupName]="i">
