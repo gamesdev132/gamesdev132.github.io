@@ -1,0 +1,10 @@
+.text-center{
+  text-align: center;
+}
+
+.trio{
+  border: 1px solid;
+  border-radius: 5px;
+  margin: 0.1rem;
+  padding: 0.5rem;
+}
