@@ -67,6 +67,12 @@ export class TrioGameComponent implements OnInit {
     });
   }
 
+  resetWinner(): void {
+    this.players.controls.forEach((player: AbstractControl<any>): void => {
+      player.get('win')?.setValue(false);
+    })
+  }
+
   addPlayer(): void {
     this.formHelper.addPlayer()
   }
@@ -95,7 +101,7 @@ export class TrioGameComponent implements OnInit {
             key: 'br',
             life: 3000
           });
-          //this.router.navigate(['/'])
+          this.resetWinner()
         }).catch((): void => {
           this.messageService.add({
             severity: 'error',
