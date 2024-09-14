@@ -4,7 +4,8 @@
   <div formArrayName="players" class="players">
     @for (player of players.controls; let i = $index; track player) {
       <div class="player" [formGroupName]="i">
-        <input pInputText formControlName="name" placeholder="Nom du joueur"/>
+        <p-dropdown formControlName="name" placeholder="Nom du joueur" [options]="playerList"
+                    [editable]="true"/>
         <p-button [icon]="player.get('win')?.value ? 'pi pi-thumbs-up-fill' : 'pi pi-thumbs-down-fill'"
                   (click)="toggleWin(i)" outlined></p-button>
       </div>

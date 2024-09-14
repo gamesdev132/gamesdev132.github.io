@@ -3,10 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Router } from "@angular/router";
 import { TrioPlayer } from "app/@shared/interface/trioPlayer";
+import { PlayersService } from "app/@shared/services/players.service";
 import { TrioService } from "app/@shared/services/trio.service";
 import { ConfirmationService, MessageService } from "primeng/api";
+import { AutoCompleteModule } from "primeng/autocomplete";
 import { ButtonModule } from "primeng/button";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
+import { DropdownModule } from "primeng/dropdown";
 import { InputTextModule } from "primeng/inputtext";
 import { ToastModule } from "primeng/toast";
 import { TrioGameHelper } from "./trio-game.helper";
@@ -14,7 +17,7 @@ import { TrioGameHelper } from "./trio-game.helper";
 @Component({
   selector: 'app-trio-game',
   standalone: true,
-  imports: [FormsModule, InputTextModule, ButtonModule, ReactiveFormsModule, NgClass, ConfirmDialogModule, ToastModule],
+  imports: [FormsModule, InputTextModule, ButtonModule, ReactiveFormsModule, NgClass, ConfirmDialogModule, ToastModule, AutoCompleteModule, DropdownModule],
   providers: [ConfirmationService, MessageService],
   templateUrl: './trio-game.component.html',
   styleUrl: './trio-game.component.css',
@@ -26,11 +29,16 @@ export class TrioGameComponent implements OnInit {
     private trioService: TrioService,
     private router: Router,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService) {
+    private messageService: MessageService,
+    private playersService: PlayersService) {
   }
 
   ngOnInit(): void {
     this.formHelper = new TrioGameHelper();
+  }
+
+  get playerList(): string[] {
+    return this.playersService.getPlayerList()
   }
 
   get players(): FormArray {

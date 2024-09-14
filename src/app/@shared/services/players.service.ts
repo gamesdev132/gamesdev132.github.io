@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore } from "@angular/fire/firestore";
+import { Firestore, orderBy } from "@angular/fire/firestore";
 import { addDoc, collection, getDocs, query } from "firebase/firestore";
 
 @Injectable({
@@ -7,6 +7,7 @@ import { addDoc, collection, getDocs, query } from "firebase/firestore";
 })
 export class PlayersService {
   private readonly playersCollection;
+  private playerList: string[] = [];
 
   constructor(private firestore: Firestore) {
     this.playersCollection = collection(this.firestore, 'players');
@@ -22,15 +23,23 @@ export class PlayersService {
 
   async savePlayer(playerName: string): Promise<void> {
     await addDoc(this.playersCollection, {name: playerName});
+    this.playerList.push(playerName);
   }
 
-  async getPlayerList(): Promise<any> {
+  async initializePlayerList(): Promise<void> {
     const querySnapshot = await getDocs(query(
       this.playersCollection,
+      orderBy('name')
     ))
-    return querySnapshot.docs.map(
+    querySnapshot.docs.map(
       doc => (
         doc.data()
-      ))
+      )).map((player) => {
+      this.playerList.push(player['name'])
+    })
+  }
+
+  getPlayerList(): string[] {
+    return this.playerList;
   }
 }
