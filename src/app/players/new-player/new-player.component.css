@@ -1,0 +1,27 @@
+:host {
+  .new-player {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+
+    .header {
+      padding-bottom: 1rem !important;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .button {
+      display: flex;
+      justify-content: end;
+      padding-top: 1rem;
+    }
+  }
+
+  input {
+    width: 340px;
+  }
+}
