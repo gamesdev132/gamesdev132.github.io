@@ -24,6 +24,7 @@ import { TrioGameHelper } from "./trio-game.helper";
 })
 export class TrioGameComponent implements OnInit {
   formHelper!: TrioGameHelper;
+  playerList: string[] = [];
 
   constructor(
     private trioService: TrioService,
@@ -33,12 +34,9 @@ export class TrioGameComponent implements OnInit {
     private playersService: PlayersService) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.formHelper = new TrioGameHelper();
-  }
-
-  get playerList(): string[] {
-    return this.playersService.getPlayerList()
+    this.playerList = await this.playersService.getPlayerList()
   }
 
   get players(): FormArray {

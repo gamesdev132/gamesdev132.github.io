@@ -1,5 +1,7 @@
-<p-card header="Trio" subheader="Meilleur ratio (parties gagnées/jouéees)" >
-  <p class="m-0">
-    Lorem ipsum dolor sit amet...
-  </p>
+<p-card header="Trio" subheader="Meilleur ratio (parties gagnées/jouéees)" [style]="{margin: '1rem'}">
+  @for (ratio of ratios; track ratio.playerName) {
+    <p class="margin-0">
+      {{ ratio.playerName + ' : ' + ratio.ratio + ' (' + ratio.wins + '/' + ratio.gamesPlayed + ')' }}
+    </p>
+  }
 </p-card>

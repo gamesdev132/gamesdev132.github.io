@@ -39,7 +39,10 @@ export class PlayersService {
     })
   }
 
-  getPlayerList(): string[] {
+  async getPlayerList(): Promise<string[]> {
+    if (this.playerList.length === 0){
+      await this.initializePlayerList();
+    }
     return this.playerList;
   }
 }
