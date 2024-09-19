@@ -20,7 +20,6 @@ export class TrioComponent implements OnInit {
   constructor(private trioService: TrioService) {
   }
 
-
   async ngOnInit(): Promise<void> {
     await this.getGamesFromLastMast();
   }

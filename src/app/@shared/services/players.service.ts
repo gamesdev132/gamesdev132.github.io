@@ -13,14 +13,6 @@ export class PlayersService {
     this.playersCollection = collection(this.firestore, 'players');
   }
 
-  async saveCompletePlayerList(): Promise<void> {
-    const playerList: string[] = ["Mattéo", "Nicolas", "Samuel", "Arthur", "Jérémie", "Ianis", "Emilien",
-      "Hugo", "Julien", "Joseph", "Judicaël", "Klemens", "Kagnana", "Yamen"]
-    for (const player of playerList) {
-      await addDoc(this.playersCollection, {name: player});
-    }
-  }
-
   async savePlayer(playerName: string): Promise<void> {
     await addDoc(this.playersCollection, {name: playerName});
     this.playerList.push(playerName);

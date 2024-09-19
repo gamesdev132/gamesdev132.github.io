@@ -98,30 +98,40 @@ export class TrioGameComponent implements OnInit {
       acceptLabel: "Enregistrer",
       rejectLabel: "Annuler",
       rejectButtonStyleClass: "p-button-text",
-      accept: async (): Promise<void> => {
-        await this.trioService.saveGame(this.formHelper.formatForAPI()).then((): void => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Succès',
-            detail: 'Résultats enregistrés',
-            key: 'br',
-            life: 3000
-          });
-          this.resetWinner()
-        }).catch((): void => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Erreur',
-            detail: 'Un problème est survenu',
-            key: 'br',
-            life: 3000
-          });
-        })
-      },
+      accept: async (): Promise<void> =>
+        await this.confirmSubmit(),
       reject: (): void => {
         this.confirmationService.close();
       }
     })
+  }
 
+  private async confirmSubmit(): Promise<void> {
+    await this.trioService.saveGame(this.formHelper.formatForAPI()).then((): void => {
+      this.showMessage()
+      this.resetWinner()
+    }).catch((): void => {
+      this.showError()
+    })
+  }
+
+  private async showMessage(): Promise<void> {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Succès',
+      detail: 'Résultats enregistrés',
+      key: 'br',
+      life: 3000
+    });
+  }
+
+  private async showError(): Promise<void> {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Erreur',
+      detail: 'Un problème est survenu',
+      key: 'br',
+      life: 3000
+    });
   }
 }
