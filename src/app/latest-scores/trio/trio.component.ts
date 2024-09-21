@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Trio } from "app/@shared/interface/trio";
-import { TrioService } from "app/@shared/services/trio.service";
 import { CardModule } from "primeng/card";
 import { CarouselModule } from "primeng/carousel";
 
@@ -14,23 +13,10 @@ import { CarouselModule } from "primeng/carousel";
   templateUrl: './trio.component.html',
   styleUrl: './trio.component.css'
 })
-export class TrioComponent implements OnInit {
-  games: Trio[] = [];
-
-  constructor(private trioService: TrioService) {
-  }
-
-  async ngOnInit(): Promise<void> {
-    await this.getGamesFromLastMast();
-  }
+export class TrioComponent {
+  @Input({required: true}) scores: Trio[] = [];
 
   getPlayerList(players: string[]): string {
     return players.join(', ')
-  }
-
-  private async getGamesFromLastMast(): Promise<void> {
-    await this.trioService.getScoresFromLastXDays().then((value: Trio[]): void => {
-      this.games = value;
-    });
   }
 }

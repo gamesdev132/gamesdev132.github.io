@@ -1,0 +1,14 @@
+.text-center {
+  text-align: center;
+}
+
+.line-height {
+  line-height: 1.4;
+}
+
+.trio {
+  border: 1px solid;
+  border-radius: 5px;
+  margin: 0.1rem;
+  padding: 0.5rem;
+}

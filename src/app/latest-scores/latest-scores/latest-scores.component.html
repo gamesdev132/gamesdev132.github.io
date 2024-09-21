@@ -1,1 +1,21 @@
-<app-trio></app-trio>
+<!-- Trio -->
+<h2 class="text-center">Trio</h2>
+@if (trioScores.length){
+  <app-trio [scores]="trioScores"></app-trio>
+} @else {
+  <app-empty-state></app-empty-state>
+}
+<!-- 6 qui prend -->
+<h2 class="text-center">6 qui Prend</h2>
+@if (sixQuiPrendScores.length) {
+  <app-point-games [scores]="sixQuiPrendScores"></app-point-games>
+} @else {
+  <app-empty-state></app-empty-state>
+}
+<!-- Hilo -->
+<h2 class="text-center">Hilo</h2>
+@if (hiloScores.length) {
+  <app-point-games [scores]="hiloScores"></app-point-games>
+} @else {
+  <app-empty-state></app-empty-state>
+}
