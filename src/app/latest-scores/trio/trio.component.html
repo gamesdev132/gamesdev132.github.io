@@ -1,14 +1,13 @@
 <h2 class="text-center">Trio</h2>
 <p-carousel
   [value]="games"
+  [showIndicators]="false"
 >
   <ng-template let-game pTemplate="item">
     <div class="trio">
       <h4>{{ game.winner }}</h4>
       <h5>{{ game.date.toDate().toLocaleDateString() }}</h5>
-      @for (player of game.players; track player) {
-        <p>{{ player }}</p>
-      }
+      <p class="line-height">{{ getPlayerList(game.players) }}</p>
     </div>
   </ng-template>
 </p-carousel>

@@ -24,6 +24,10 @@ export class TrioComponent implements OnInit {
     await this.getGamesFromLastMast();
   }
 
+  getPlayerList(players: string[]): string {
+    return players.join(', ')
+  }
+
   private async getGamesFromLastMast(): Promise<void> {
     await this.trioService.getScoresFromLastXDays().then((value: Trio[]): void => {
       this.games = value;
