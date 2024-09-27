@@ -1,3 +1,43 @@
-<div class="round-scores">
-  <h2>Ça arrive...</h2>
-</div>
+<form [formGroup]="form">
+  <p-table [value]="players.controls">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nom du joueur</th>
+        <ng-container>
+          @for(round of getPoints(0); let roundIndex = $index;track round){
+            <ng-container>
+              <th>Round {{ roundIndex + 1 }}</th>
+            </ng-container>
+          }
+        </ng-container>
+        <th>Total</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-player let-i="rowIndex">
+      <tr [formGroup]="player">
+        <td>
+          <p-dropdown formControlName="name" placeholder="Nom du joueur" [options]="playerList"
+                      [editable]="true" appendTo="body" [style]="{'width':'190px'}"/>
+        </td>
+
+        @for(pointControl of getPoints(i); track pointControl){
+          <td>
+              <p-inputNumber [formControl]="pointControl" placeholder="Points" [inputStyle]="{'width':'72px'}" max="1000" min="-7"/>
+          </td>
+        }
+        <td>
+          <p-inputNumber [inputStyle]="{'width':'72px'}" [disabled]="true"></p-inputNumber>
+        </td>
+
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-button icon="pi pi-user-minus" outlined (click)="removePlayer()"
+            title="Supprimer un joueur"/>
+  <p-button icon="pi pi-user-plus" outlined (click)="addPlayer()"
+             title="Ajouter un joueur"/>
+  <p-button (click)="addRound()">Ajouter un round</p-button>
+  <!--<button type="submit">Submit</button>-->
+</form>
