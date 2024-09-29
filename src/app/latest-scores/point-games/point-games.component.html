@@ -1,9 +1,10 @@
 <p-carousel [value]="scores" [showIndicators]="false">
   <ng-template let-score pTemplate="item">
     <div class="trio">
-      <h4>{{ score.players[0] }}</h4>
       <h5>{{ score.date.toDate().toLocaleDateString() }}</h5>
-      <p>{{ getPlayerList(score.players) }}</p>
+      @for (player of score.players; track player){
+        <p [class]="player.isWinner ? 'winner': ''">{{ player.name}} {{player.total}}</p>
+      }
     </div>
   </ng-template>
 </p-carousel>

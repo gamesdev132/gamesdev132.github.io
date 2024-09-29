@@ -1,6 +1,6 @@
 import { FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
 import { GamePointsParams } from "app/@shared/interface/game-points-params";
-import { GamePointsScores } from "app/@shared/interface/game-points-scores";
+import { GamePointsPlayer, GamePointsScores } from "app/@shared/interface/game-points-scores";
 import { TrioPlayer } from "app/@shared/interface/trioPlayer";
 import { Timestamp } from "firebase/firestore";
 
@@ -56,12 +56,12 @@ export class RoundScoresGameHelper {
   }
 
   formatForAPI(): GamePointsScores {
-    const players = this.players.getRawValue().map((player: any) => {
+    const players: GamePointsPlayer[] = this.players.getRawValue().map((player: any) => {
       return {
         name: player.name,
         total: player.total,
       };
-    });
+    }).sort((player1: GamePointsPlayer, player2: GamePointsPlayer) => player1.total - player2.total);
     return {
       players: players,
       date: Timestamp.now()
@@ -74,7 +74,7 @@ export class RoundScoresGameHelper {
       points: new FormArray([
         new FormControl(null, Validators.required),
       ]),
-      total: new FormControl({ value: null, disabled: true}),
+      total: new FormControl({value: null, disabled: true}),
     });
   }
 }

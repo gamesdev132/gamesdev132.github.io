@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Firestore, orderBy, where } from "@angular/fire/firestore";
-import { GamePointsScores } from "app/@shared/interface/game-points-scores";
+import { GamePointsPlayer, GamePointsScores } from "app/@shared/interface/game-points-scores";
 import { PlayersService } from "app/@shared/services/players.service";
 import { getPastTimestampDate } from "app/@shared/utils/date.utils";
 import { addDoc, collection, getDocs, query, Timestamp } from 'firebase/firestore'
@@ -19,7 +19,6 @@ export class GamePointsService {
 
   async saveGame(scores: GamePointsScores, game: string): Promise<void> {
     const collection = this.getCollection(game);
-    console.log('collection', collection)
     await addDoc(collection, scores);
   }
 
@@ -31,10 +30,22 @@ export class GamePointsService {
       where('date', '>=', startDate),
       orderBy('date', 'desc')
     ))
-    return querySnapshot.docs.map(
+    const gamePointsScores: GamePointsScores[] = querySnapshot.docs.map(
       doc => (
         doc.data() as GamePointsScores
       ))
+    gamePointsScores.forEach((gamePoints: GamePointsScores) => {
+      let bestScore: number = Math.min(...gamePoints.players.map((player: GamePointsPlayer) => player.total));
+
+      gamePoints.players = gamePoints.players.map((player: GamePointsPlayer): GamePointsPlayer => {
+        return {
+          name: player.name,
+          total: player.total,
+          isWinner: player.total === bestScore, // Set isWinner to true for the player with the best score
+        };
+      });
+    });
+    return gamePointsScores
   }
 
   private getCollection(game: string){

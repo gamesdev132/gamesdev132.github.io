@@ -86,7 +86,6 @@ export class RoundScoresGameComponent implements OnInit {
   }
 
   async submit(): Promise<void> {
-    console.log('submit');
     await this.gamePointsService.saveGame(this.formHelper.formatForAPI(), 'SixQuiPrend');
   }
 }

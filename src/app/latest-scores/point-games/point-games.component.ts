@@ -13,8 +13,4 @@ import { CarouselModule } from "primeng/carousel";
 })
 export class PointGamesComponent {
   @Input({required: true}) scores!: GamePointsScores[];
-
-  getPlayerList(players: string[]): string {
-    return players.join(', ')
-  }
 }
