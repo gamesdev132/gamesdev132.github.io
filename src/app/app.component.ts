@@ -36,6 +36,6 @@ export class AppComponent implements OnInit {
   }
 
   get showAddButton(): boolean {
-    return this.router.url !== '/addScores'
+    return this.router.url !== '/scores/new'
   }
 }

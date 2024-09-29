@@ -7,6 +7,6 @@ import { StatisticsComponent } from "./statistics/statistics.component";
 export const routes: Routes = [
   {path: '', component: StatisticsComponent},
   {path: 'scores', component: LatestScoresComponent},
-  {path: 'addScores', component: ChooseGameComponent},
+  {path: 'scores/new', component: ChooseGameComponent},
   {path: 'player/new', component: NewPlayerComponent}
 ];

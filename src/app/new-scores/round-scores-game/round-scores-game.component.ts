@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
-import { Event } from "@angular/router";
-import { TrioPlayer } from "app/@shared/interface/trioPlayer";
 import { SixQuiPrendParams } from "app/@shared/params/game-points-parms";
 import { GamePointsService } from "app/@shared/services/game-points.service";
 import { PlayersService } from "app/@shared/services/players.service";
