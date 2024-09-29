@@ -1,15 +1,23 @@
 import { FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
+import { GamePointsParams } from "app/@shared/interface/game-points-params";
+import { GamePointsScores } from "app/@shared/interface/game-points-scores";
 import { TrioPlayer } from "app/@shared/interface/trioPlayer";
+import { Timestamp } from "firebase/firestore";
 
 export class RoundScoresGameHelper {
+  readonly PLAYERS_KEY = 'players'
+  readonly PLAYERS_POINTS_KEY = 'points'
   private form!: FormGroup;
+  numberOfRounds: number = 1;
+  gameParameters: GamePointsParams;
 
-  constructor() {
+  constructor(gameParams: GamePointsParams) {
+    this.gameParameters = gameParams;
     this.initializeForm();
   }
 
   get players(): FormArray {
-    return this.form.get('players') as FormArray;
+    return this.form.get(this.PLAYERS_KEY) as FormArray;
   }
 
   getForm(): FormGroup {
@@ -21,38 +29,52 @@ export class RoundScoresGameHelper {
       players: new FormArray([], [Validators.minLength(3), Validators.maxLength(7)])
     });
 
-    for (let i: number = 0; i < 3; i++) {
+    for (let i: number = 0; i < this.gameParameters.minimumPlayers; i++) {
       this.addPlayer();
     }
   }
 
   addPlayer(): void {
-    if (this.players.length < 12) {
+    if (this.players.length < this.gameParameters.maximumPlayers) {
       this.players.push(this.createEntity());
+    }
+  }
+
+  removePlayer(): void {
+    if (this.players.length > this.gameParameters.minimumPlayers) {
+      const index: number = (this.players?.value as TrioPlayer[]).findIndex((player: TrioPlayer) => !player.name)
+      this.players.removeAt(index);
     }
   }
 
   addRound(): void {
     this.players.controls.forEach((player) => {
-      const pointsArray = player.get('points') as FormArray;
-      pointsArray.push(new FormControl(null));
+      const pointsArray = player.get(this.PLAYERS_POINTS_KEY) as FormArray;
+      pointsArray.push(new FormControl(null, Validators.required));
     })
+    this.numberOfRounds += 1
   }
 
-  removePlayer(): void {
-    if (this.players.length > 3) {
-      const index: number = (this.players?.value as TrioPlayer[]).findIndex((player: TrioPlayer) => !player.name)
-      this.players.removeAt(index);
-    }
+  formatForAPI(): GamePointsScores {
+    const players = this.players.getRawValue().map((player: any) => {
+      return {
+        name: player.name,
+        total: player.total,
+      };
+    });
+    return {
+      players: players,
+      date: Timestamp.now()
+    };
   }
 
   private createEntity(): FormGroup {
     return new FormGroup<any>({
       name: new FormControl(null, Validators.required),
       points: new FormArray([
-        new FormControl(null),
+        new FormControl(null, Validators.required),
       ]),
-      total: new FormControl(null),
+      total: new FormControl({ value: null, disabled: true}),
     });
   }
 }

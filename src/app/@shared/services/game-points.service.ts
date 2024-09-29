@@ -19,6 +19,7 @@ export class GamePointsService {
 
   async saveGame(scores: GamePointsScores, game: string): Promise<void> {
     const collection = this.getCollection(game);
+    console.log('collection', collection)
     await addDoc(collection, scores);
   }
 
