@@ -41,7 +41,7 @@ export class GamePointsService {
         return {
           name: player.name,
           total: player.total,
-          isWinner: player.total === bestScore, // Set isWinner to true for the player with the best score
+          isWinner: player.total === bestScore,
         };
       });
     });

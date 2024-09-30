@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
+import { Router } from "@angular/router";
 import { SixQuiPrendParams } from "app/@shared/params/game-points-parms";
 import { GamePointsService } from "app/@shared/services/game-points.service";
 import { PlayersService } from "app/@shared/services/players.service";
 import { RoundScoresGameHelper } from "app/new-scores/round-scores-game/round-scores-game.helper";
+import { ConfirmationService, MessageService } from "primeng/api";
 import { Button } from "primeng/button";
+import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { DropdownModule } from "primeng/dropdown";
 import { InputNumberModule } from "primeng/inputnumber";
 import { TableModule } from "primeng/table";
+import { ToastModule } from "primeng/toast";
 
 @Component({
   selector: 'app-round-scores-game',
@@ -17,8 +21,11 @@ import { TableModule } from "primeng/table";
     ReactiveFormsModule,
     DropdownModule,
     InputNumberModule,
-    Button
+    Button,
+    ConfirmDialogModule,
+    ToastModule
   ],
+  providers: [MessageService, ConfirmationService],
   templateUrl: './round-scores-game.component.html',
   styleUrl: './round-scores-game.component.css'
 })
@@ -26,7 +33,12 @@ export class RoundScoresGameComponent implements OnInit {
   formHelper!: RoundScoresGameHelper;
   playerList: string[] = [];
 
-  constructor(private playersService: PlayersService, private gamePointsService: GamePointsService) {
+  constructor(
+    private playersService: PlayersService,
+    private gamePointsService: GamePointsService,
+    private router: Router,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService) {
   }
 
   async ngOnInit(): Promise<void> {
@@ -63,7 +75,7 @@ export class RoundScoresGameComponent implements OnInit {
     this.players.at(index).get('total')?.setValue(total)
   }
 
-  get numberOfRounds() : number{
+  get numberOfRounds(): number {
     return this.formHelper.numberOfRounds;
   }
 
@@ -83,7 +95,51 @@ export class RoundScoresGameComponent implements OnInit {
     this.formHelper.addRound()
   }
 
-  async submit(): Promise<void> {
-    await this.gamePointsService.saveGame(this.formHelper.formatForAPI(), 'SixQuiPrend');
+  async submit(event: Event): Promise<void> {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      header: "Confirmer",
+      message: 'Voulez-vous enregistrer les scores ?',
+      icon: 'none',
+      acceptIcon: "none",
+      rejectIcon: "none",
+      acceptLabel: "Enregistrer",
+      rejectLabel: "Annuler",
+      rejectButtonStyleClass: "p-button-text",
+      accept: async (): Promise<void> =>
+        await this.confirmSubmit(),
+      reject: (): void => {
+        this.confirmationService.close();
+      }
+    })
+  }
+
+  private async confirmSubmit(): Promise<void> {
+    await this.gamePointsService.saveGame(this.formHelper.formatForAPI(), 'SixQuiPrend').then((): void => {
+      this.showMessage()
+      this.form.reset()
+    }).catch((): void => {
+      this.showError()
+    })
+  }
+
+  private async showMessage(): Promise<void> {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Succès',
+      detail: 'Résultats enregistrés',
+      key: 'br',
+      life: 3000
+    });
+  }
+
+  private async showError(): Promise<void> {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Erreur',
+      detail: 'Un problème est survenu',
+      key: 'br',
+      life: 3000
+    });
   }
 }
