@@ -1,7 +1,25 @@
 <p-card header="Trio" subheader="Meilleur ratio (parties gagnées/jouéees)" [style]="{margin: '1rem'}">
-  @for (ratio of ratios; track ratio.playerName) {
+  @for (ratio of trioRatios; track ratio.playerName) {
     <p class="margin-0">
       {{ ratio.playerName + ' : ' + ratio.ratio + ' (' + ratio.wins + '/' + ratio.gamesPlayed + ')' }}
     </p>
+  }
+</p-card>
+<p-card header="Six Qui Prend" subheader="Les meilleurs" [style]="{margin: '1rem'}">
+  @for (ratio of bestSixQuiPrendPlayerList; let index = $index; track ratio.playerName) {
+    @if (ratio.wins !== 0){
+      <p class="margin-0">
+        {{ 'Top ' + (index + 1) + ' : ' + ratio.playerName + ' : (' + ratio.wins + '/' + ratio.gamesPlayed + ')' }}
+      </p>
+    }
+  }
+</p-card>
+<p-card header="Six Qui Prend" subheader="Les plus éclatés au sol" [style]="{margin: '1rem'}">
+  @for (ratio of worstSixQuiPrendPlayerList; let index = $index; track ratio.playerName) {
+    @if (ratio.defeats !== 0){
+      <p class="margin-0">
+        {{ 'Top ' + (index + 1) + ' : ' + ratio.playerName + ' : (' + ratio.defeats + '/' + ratio.gamesPlayed + ')' }}
+      </p>
+    }
   }
 </p-card>

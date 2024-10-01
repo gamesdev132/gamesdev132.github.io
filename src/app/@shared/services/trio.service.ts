@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Firestore, orderBy, where } from "@angular/fire/firestore";
-import { Ratio } from "app/@shared/interface/ratio";
+import { TrioRatio } from "app/@shared/interface/trioRatio";
 import { PlayersService } from "app/@shared/services/players.service";
 import { getPastTimestampDate } from "app/@shared/utils/date.utils";
 import { addDoc, collection, getDocs, query, Timestamp } from 'firebase/firestore'
@@ -33,10 +33,10 @@ export class TrioService {
       ))
   }
 
-  async getRatios(): Promise<Ratio[]> {
+  async getRatios(): Promise<TrioRatio[]> {
     const players: string[] = await this.playersService.getPlayerList();
     const scores: Trio[] = await this.getScoresFromLastXDays(31)
-    let ratios: Ratio[] = []
+    let ratios: TrioRatio[] = []
 
     players.forEach((player: string) => {
       ratios.push({
@@ -49,21 +49,21 @@ export class TrioService {
 
     scores.forEach((score: Trio): void => {
       score.players.forEach((player: string) => {
-        const playerRatio = ratios.find((ratio: Ratio): boolean => ratio.playerName === player)
+        const playerRatio = ratios.find((ratio: TrioRatio): boolean => ratio.playerName === player)
         if (playerRatio) playerRatio.gamesPlayed++
       })
-      const winnerRatio = ratios.find((ratio: Ratio): boolean => score.winner === ratio.playerName)
+      const winnerRatio = ratios.find((ratio: TrioRatio): boolean => score.winner === ratio.playerName)
       if (winnerRatio) winnerRatio.wins++
     })
 
-    ratios = ratios.filter((ratio: Ratio) => ratio.gamesPlayed !== 0)
-    ratios.forEach((ratio: Ratio) => {
+    ratios = ratios.filter((ratio: TrioRatio) => ratio.gamesPlayed !== 0)
+    ratios.forEach((ratio: TrioRatio) => {
       ratio.ratio = parseFloat((ratio.wins / ratio.gamesPlayed).toFixed(3))
     })
     return ratios.sort((a, b) => this.compareRatios(a, b))
   }
 
-  private compareRatios(a: Ratio, b: Ratio): number {
+  private compareRatios(a: TrioRatio, b: TrioRatio): number {
     if (a.ratio > b.ratio) return -1;
     if (a.ratio < b.ratio) return 1;
     if (a.gamesPlayed < b.gamesPlayed) return -1;

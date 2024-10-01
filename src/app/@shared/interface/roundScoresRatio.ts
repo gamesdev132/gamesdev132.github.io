@@ -1,6 +1,6 @@
-export interface Ratio {
+export interface RoundScoresRatio {
   playerName: string,
-  ratio: number,
   wins: number,
+  defeats: number,
   gamesPlayed: number,
 }

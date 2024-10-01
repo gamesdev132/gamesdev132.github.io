@@ -9,4 +9,5 @@ export interface GamePointsPlayer {
   name: string;
   total: number;
   isWinner?: boolean;
+  isLooser?: boolean;
 }
