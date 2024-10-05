@@ -1,13 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from "@angular/forms";
 import { TrioRatio } from "app/@shared/interface/trioRatio";
 import { TrioService } from "app/@shared/services/trio.service";
 import { ChartModule } from "primeng/chart";
+import { DropdownModule } from "primeng/dropdown";
+
+export enum ChartType {
+  WON = 'Parties gagnées', PLAYED_AND_WON = 'Parties jouées et gagnées', RATIOS = 'Ratios'
+}
 
 @Component({
   selector: 'app-trio',
   standalone: true,
   imports: [
-    ChartModule
+    ChartModule,
+    DropdownModule,
+    FormsModule
   ],
   templateUrl: './trio.component.html',
   styleUrl: './trio.component.css'
@@ -15,27 +23,71 @@ import { ChartModule } from "primeng/chart";
 export class TrioComponent implements OnInit {
   data: any;
   options: any;
+  chartTypes: any[];
+  charTypeName: "bar" | "doughnut" = "bar";
+  selectedChartType: ChartType = ChartType.PLAYED_AND_WON;
+  ratios: TrioRatio[] = [];
 
   constructor(private trioService: TrioService) {
+    this.chartTypes = [ChartType.PLAYED_AND_WON, ChartType.WON, ChartType.RATIOS]
   }
 
   async ngOnInit(): Promise<void> {
-    const ratios: TrioRatio[] = await this.trioService.getRatios();
-    console.log(ratios)
+    this.ratios = await this.trioService.getRatios();
+    this.setChar();
+
+  }
+
+  setChar(): void {
+    switch (this.selectedChartType) {
+      case ChartType.WON:
+        this.setWonChar();
+        break;
+      case ChartType.PLAYED_AND_WON:
+        this.setPlayedAndWonChar();
+        break;
+      case ChartType.RATIOS:
+        this.setRatiosChar();
+        break;
+      default:
+        this.setPlayedAndWonChar();
+    }
+  }
+
+  private setWonChar(): void {
+    this.charTypeName = "doughnut"
+    this.data = {
+      labels: this.ratios.filter((ratio) => ratio.wins > 0).map((ratio: TrioRatio) => ratio.playerName),
+      datasets: [
+        {
+          data: this.ratios.filter((ratio) => ratio.wins > 0).map((ratio) => ratio.wins),
+        }
+      ]
+    };
+
+
+    this.options = {
+      cutout: '60%',
+    };
+  }
+
+  private setPlayedAndWonChar(): void {
+    this.charTypeName = "bar"
+
     const documentStyle: CSSStyleDeclaration = getComputedStyle(document.documentElement);
 
     this.data = {
-      labels: ratios.map((value: TrioRatio) => value.playerName),
+      labels: this.ratios.map((value: TrioRatio) => value.playerName),
       datasets: [
         {
           label: 'Parties gagnées',
           backgroundColor: documentStyle.getPropertyValue('--blue-500'),
-          data: ratios.map((value: TrioRatio) => value.wins)
+          data: this.ratios.map((value: TrioRatio) => value.wins)
         },
         {
           label: 'Parties perdues',
           backgroundColor: documentStyle.getPropertyValue('--blue-300'),
-          data: ratios.map((value: TrioRatio) => value.gamesPlayed - value.wins)
+          data: this.ratios.map((value: TrioRatio) => value.gamesPlayed - value.wins)
         }
       ]
     };
@@ -64,5 +116,51 @@ export class TrioComponent implements OnInit {
         }
       }
     };
+  }
+
+  private setRatiosChar(): void {
+    this.charTypeName = "bar"
+
+    this.data = {
+      labels: this.ratios.map((ratio) => ratio.playerName),
+      datasets: [
+        {
+          label: 'Ratio',
+          data: this.ratios.map((ratio) => ratio.ratio),
+          borderWidth: 1
+        },
+      ]
+    };
+
+    this.options = {
+      plugins: {
+      legend: {
+        /*labels: {
+          color: textColor
+        }*/
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+          ticks: {
+         // color: textColorSecondary
+        },
+        grid: {
+          //color: surfaceBorder,
+            drawBorder: false
+        }
+      },
+      x: {
+        /*ticks: {
+          color: textColorSecondary
+        },*/
+        grid: {
+          //color: surfaceBorder,
+            drawBorder: false
+        }
+      }
+    }
+  };
   }
 }
