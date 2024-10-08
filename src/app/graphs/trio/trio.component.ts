@@ -132,35 +132,6 @@ export class TrioComponent implements OnInit {
       ]
     };
 
-    this.options = {
-      plugins: {
-      legend: {
-        /*labels: {
-          color: textColor
-        }*/
-      }
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-          ticks: {
-         // color: textColorSecondary
-        },
-        grid: {
-          //color: surfaceBorder,
-            drawBorder: false
-        }
-      },
-      x: {
-        /*ticks: {
-          color: textColorSecondary
-        },*/
-        grid: {
-          //color: surfaceBorder,
-            drawBorder: false
-        }
-      }
-    }
-  };
+    this.options = {};
   }
 }
