@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { Router } from "@angular/router";
-import { SixQuiPrendParams } from "app/@shared/params/game-points-parms";
+import { GamePointsParams } from "app/@shared/interface/game-points-params";
+import { GamePointsScores } from "app/@shared/interface/game-points-scores";
+import { HiloParams, SixQuiPrendParams } from "app/@shared/params/game-points-parms";
 import { GamePointsService } from "app/@shared/services/game-points.service";
 import { PlayersService } from "app/@shared/services/players.service";
 import { RoundScoresGameHelper } from "app/new-scores/round-scores-game/round-scores-game.helper";
@@ -30,6 +32,8 @@ import { ToastModule } from "primeng/toast";
   styleUrl: './round-scores-game.component.css'
 })
 export class RoundScoresGameComponent implements OnInit {
+  @Input() gameName : 'SixQuiPrend' | 'Hilo' = 'SixQuiPrend';
+  gamePointsParams : GamePointsParams = SixQuiPrendParams;
   formHelper!: RoundScoresGameHelper;
   playerList: string[] = [];
 
@@ -43,7 +47,10 @@ export class RoundScoresGameComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.formHelper = new RoundScoresGameHelper(SixQuiPrendParams);
-    this.playerList = await this.playersService.getPlayerList()
+    this.playerList = await this.playersService.getPlayerList();
+    if (this.gameName === 'Hilo') {
+      this.gamePointsParams = HiloParams;
+    }
   }
 
   get isFormDisabled(): boolean {
@@ -59,11 +66,11 @@ export class RoundScoresGameComponent implements OnInit {
   }
 
   get disablePlayerAdding(): boolean {
-    return this.players.controls.length === SixQuiPrendParams.maximumPlayers
+    return this.players.controls.length === this.gamePointsParams.maximumPlayers
   }
 
   get disablePlayerRemoving(): boolean {
-    return this.players.controls.length === SixQuiPrendParams.minimumPlayers
+    return this.players.controls.length === this.gamePointsParams.minimumPlayers
   }
 
   updatePlayerTotal(index: number): void {
@@ -115,7 +122,7 @@ export class RoundScoresGameComponent implements OnInit {
   }
 
   private async confirmSubmit(): Promise<void> {
-    await this.gamePointsService.saveGame(this.formHelper.formatForAPI(), 'SixQuiPrend').then((): void => {
+    await this.gamePointsService.saveGame(this.formHelper.formatForAPI(), this.gameName).then((): void => {
       this.showMessage()
       this.form.reset()
     }).catch((): void => {
