@@ -1,18 +1,13 @@
-.trio__header {
+.trio__icon {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
+  height: 52px;
 }
 
 .trio__title {
   display: flex;
   justify-content: space-between;
-}
-
-.trio__players {
-  display: flex;
-  align-items: center;
-  gap: 16px;
 }
 
 ::ng-deep .p-card .p-card-content{

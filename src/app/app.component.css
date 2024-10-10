@@ -2,6 +2,15 @@ main {
   max-height: 100vh;
 }
 
+
+::ng-deep .card {
+  border: 1px solid #cfcfcf;
+  border-radius: 5px;
+  margin: 0.1rem;
+  padding: 0.35rem 1.2rem;
+}
+
+
 .links {
   display: flex;
   justify-content: center;
