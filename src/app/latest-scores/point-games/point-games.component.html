@@ -1,9 +1,26 @@
 <p-carousel [value]="scores" [showIndicators]="false">
   <ng-template let-score pTemplate="item">
     <div class="card">
-      <h5>{{ score.date.toDate().toLocaleDateString() }}</h5>
-      @for (player of score.players; track player){
-        <p [class]="player.isWinner ? 'winner': ''">{{ player.name}} {{player.total}}</p>
+      <div class="scores__title">
+        <div class="scores__icon">
+          <fa-icon [icon]="faMedal" [style.color]="getColor(score.players[0])"
+                   [style]="{'font-size': '1.4rem'}"></fa-icon>
+          <h4>{{ score.players[0].name }} {{ score.players[0].total }}</h4>
+        </div>
+        <div class="scores__icon">
+          <fa-icon [icon]="faDate" [style]="{'font-size': '1.2rem'}"></fa-icon>
+          <h5>{{ score.date.toDate().toLocaleDateString() }}</h5>
+        </div>
+      </div>
+      @for (player of score.players; let i = $index; track player) {
+        @if (i > 0){
+        <div class="scores__icon points-games__height">
+          @if (player.isWinner || player.isSecond || player.isThird) {
+            <fa-icon [icon]="faMedal" [style.color]="getColor(player)" [style]="{'font-size': '1.4rem'}"></fa-icon>
+          }
+          <span [class]="player.isWinner ? 'winner': ''">{{ player.name }} {{ player.total }}</span>
+        </div>
+        }
       }
     </div>
   </ng-template>

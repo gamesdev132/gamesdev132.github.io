@@ -4,16 +4,17 @@
 >
   <ng-template let-game pTemplate="item">
     <div class="card">
-      <div class="trio__title">
-        <div class="trio__icon">
+      <div class="scores__title">
+        <div class="scores__icon">
           <fa-icon [icon]="faCrown" [style]="{color: '#FFD43B', 'font-size': '1.8rem'}"></fa-icon>
           <h4>{{ game.winner }}</h4>
         </div>
-        <div class="trio__icon">
+        <div class="scores__icon">
           <fa-icon [icon]="faDate" [style]="{'font-size': '1.2rem'}"></fa-icon>
-          <h5>{{ game.date.toDate().toLocaleDateString() }}</h5></div>
+          <h5>{{ game.date.toDate().toLocaleDateString() }}</h5>
+        </div>
       </div>
-      <div class="trio__icon">
+      <div class="scores__icon">
         <fa-icon [icon]="faGroup" [style]="{'font-size': '1.4rem'}"></fa-icon>
         <p class="line-height">{{ getPlayerList(game.players) }}</p>
       </div>

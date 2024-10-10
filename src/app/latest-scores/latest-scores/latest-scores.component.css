@@ -5,3 +5,19 @@
 .line-height {
   line-height: 1.4;
 }
+
+::ng-deep .scores__icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 52px;
+}
+
+::ng-deep .scores__title{
+  display: flex;
+  justify-content: space-between;
+}
+
+::ng-deep .p-card .p-card-content{
+  padding: 0 !important;
+}
