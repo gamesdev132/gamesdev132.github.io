@@ -38,10 +38,13 @@ export class GamePointsService {
     gamePointsScores.forEach((gamePoints: GamePointsScores) => {
       let sortedPlayers = [...gamePoints.players].sort(
         (player1: GamePointsPlayer, player2: GamePointsPlayer) => player1.total - player2.total);
-      let bestScore: number = sortedPlayers[0].total;
-      let secondScore: number = sortedPlayers[1]?.total || bestScore;
-      let thirdScore: number = sortedPlayers[2]?.total || secondScore;
-      let worstScore: number = sortedPlayers[sortedPlayers.length - 1].total;
+
+      let uniqueScores = [...new Set(sortedPlayers.map(player => player.total))];
+
+      let bestScore: number = uniqueScores[0];
+      let secondScore: number = uniqueScores[1] || bestScore;
+      let thirdScore: number = uniqueScores[2] || secondScore;
+      let worstScore: number = uniqueScores[uniqueScores.length - 1];
 
       gamePoints.players = gamePoints.players.map((player: GamePointsPlayer): GamePointsPlayer => {
         return {
