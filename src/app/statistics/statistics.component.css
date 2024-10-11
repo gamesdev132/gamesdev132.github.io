@@ -2,4 +2,8 @@
   .margin-0 {
     margin: 0;
   }
+  
+  ::ng-deep .p-card-content {
+    padding: 0;
+  }
 }

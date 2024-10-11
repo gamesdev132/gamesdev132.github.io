@@ -6,11 +6,13 @@ import { GamePointsService } from "app/@shared/services/game-points.service";
 import { TrioService } from "app/@shared/services/trio.service";
 import { CardModule } from 'primeng/card';
 import { DropdownModule } from "primeng/dropdown";
+import { PodiumComponent } from './podium/podium.component';
+import { PodiumData } from 'app/@shared/interface/podium-data';
 
 @Component({
   selector: 'app-statistics',
   standalone: true,
-  imports: [CardModule, DropdownModule, FormsModule],
+  imports: [CardModule, DropdownModule, FormsModule, PodiumComponent],
   templateUrl: './statistics.component.html',
   styleUrl: './statistics.component.css'
 })
@@ -48,6 +50,12 @@ export class StatisticsComponent implements OnInit{
   private async getRatios(): Promise<void> {
     this.trioRatios = await this.trioService.getRatios();
     this.sixQuiPrendRatios = await this.gamePointsService.getRatios();
-    console.log(this.sixQuiPrendRatios)
+  }
+
+  getSixQuiPrendPodium() : PodiumData[]{
+    return this.sixQuiPrendRatios.filter((value) => value.wins > 0).map((value) => {return {
+      name: value.playerName,
+      ratio: `(${value.wins}/${value.gamesPlayed})`
+    }})
   }
 }
