@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PodiumData } from 'app/@shared/interface/podium-data';
+import { RatioData } from 'app/@shared/interface/ratio-data';
 
 @Component({
   selector: 'app-podium',
@@ -9,7 +9,7 @@ import { PodiumData } from 'app/@shared/interface/podium-data';
   styleUrl: './podium.component.css'
 })
 export class PodiumComponent {
-  @Input({required: true}) podiumData!: PodiumData[];
+  @Input({required: true}) podiumData!: RatioData[];
 
   get firstPlayerName(): string {
     return this.podiumData[0] ? this.podiumData[0].name : ''

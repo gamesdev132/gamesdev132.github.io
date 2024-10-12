@@ -7,7 +7,7 @@ import { TrioService } from "app/@shared/services/trio.service";
 import { CardModule } from 'primeng/card';
 import { DropdownModule } from "primeng/dropdown";
 import { PodiumComponent } from './podium/podium.component';
-import { PodiumData } from 'app/@shared/interface/podium-data';
+import { RatioData } from 'app/@shared/interface/ratio-data';
 
 @Component({
   selector: 'app-statistics',
@@ -21,6 +21,10 @@ export class StatisticsComponent implements OnInit{
   sixQuiPrendRatios: RoundScoresRatio[] = [];
 
   constructor(private trioService: TrioService, private gamePointsService: GamePointsService) {
+  }
+
+  async ngOnInit(): Promise<void> {
+    await this.getRatios();
   }
 
   get bestSixQuiPrendPlayerList(){
@@ -43,19 +47,15 @@ export class StatisticsComponent implements OnInit{
     }).slice(0, 3)
   }
 
-  async ngOnInit(): Promise<void> {
-    await this.getRatios();
+  get sixQuiPrendRatioData() : RatioData[]{
+    return this.sixQuiPrendRatios.filter((value) => value.wins > 0).map((value) => {return {
+      name: value.playerName,
+      ratio: `(${value.wins}/${value.gamesPlayed})`
+    }})
   }
 
   private async getRatios(): Promise<void> {
     this.trioRatios = await this.trioService.getRatios();
     this.sixQuiPrendRatios = await this.gamePointsService.getRatios();
-  }
-
-  getSixQuiPrendPodium() : PodiumData[]{
-    return this.sixQuiPrendRatios.filter((value) => value.wins > 0).map((value) => {return {
-      name: value.playerName,
-      ratio: `(${value.wins}/${value.gamesPlayed})`
-    }})
   }
 }

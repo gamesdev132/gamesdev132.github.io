@@ -1,4 +1,4 @@
-export interface PodiumData {
+export interface RatioData {
     name: string;
     ratio: string;
 }
