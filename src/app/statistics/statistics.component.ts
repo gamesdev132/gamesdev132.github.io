@@ -47,6 +47,15 @@ export class StatisticsComponent implements OnInit{
     }).slice(0, 3)
   }
 
+  get trioRatioData() : RatioData[] {
+    return this.trioRatios.map((value) => {
+      return {
+        name: value.playerName,
+        ratio: `${value.ratio} (${value.wins}/${value.gamesPlayed})`,
+      }
+    })
+  }
+
   get sixQuiPrendRatioData() : RatioData[]{
     return this.sixQuiPrendRatios.filter((value) => value.wins > 0).map((value) => {return {
       name: value.playerName,

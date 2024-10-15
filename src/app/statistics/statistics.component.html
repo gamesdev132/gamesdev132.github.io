@@ -1,10 +1,18 @@
 <p-card header="Trio" subheader="Meilleur ratio (parties gagnées/jouéees)" [style]="{margin: '1rem'}">
-  @for (ratio of trioRatios; track ratio.playerName) {
-    <p class="margin-0">
-      {{ ratio.playerName + ' : ' + ratio.ratio + ' (' + ratio.wins + '/' + ratio.gamesPlayed + ')' }}
-    </p>
-  }
+  <div class="trio-scores">
+    <app-podium [podiumData]="trioRatioData"></app-podium>
+    <div class="trio-scores__others">
+      @for (ratio of trioRatioData; let i = $index; track ratio.name) {
+        @if(i > 2){
+          <p class="margin-0">
+            {{ (i+1) + '/ ' + ratio.name + ' : ' + ratio.ratio }}
+          </p>
+        }
+      }
+    </div>
+  </div>
 </p-card>
+
 <p-card header="Six Qui Prend" subheader="Meilleur ratio (parties gagnées/jouéees)" [style]="{margin: '1rem'}">
 <app-podium [podiumData]="sixQuiPrendRatioData"></app-podium>
 </p-card>

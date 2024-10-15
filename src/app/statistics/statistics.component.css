@@ -6,4 +6,28 @@
   ::ng-deep .p-card-content {
     padding: 0;
   }
+
+  @media (max-width: 500px) {
+    .trio-scores {
+      flex-direction: column !important;
+    }
+
+    .trio-scores__others {
+      display: grid !important;
+      grid-template-columns: 50% 50% !important;
+      padding: 1rem 0 0 0 !important;
+    }
+  }
+
+  .trio-scores {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .trio-scores__others {
+    padding: 0 0 0 1rem;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.4;
+  }
 }
