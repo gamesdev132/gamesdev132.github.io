@@ -6,6 +6,10 @@
   line-height: 1.4;
 }
 
+.latest-score__item {
+  margin: 1rem 0;
+}
+
 ::ng-deep .scores__icon {
   display: flex;
   align-items: center;
@@ -13,11 +17,35 @@
   height: 52px;
 }
 
-::ng-deep .scores__title{
+::ng-deep .p-carousel {
+  margin: 0 0.5rem;
+}
+
+::ng-deep .scores__title {
   display: flex;
   justify-content: space-between;
 }
 
 ::ng-deep .p-card .p-card-content{
   padding: 0 !important;
+}
+
+.point-games {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.point-games__item {
+  width: 50%;
+}
+
+@media (max-width: 800px) {
+  .point-games {
+    flex-direction: column;
+  }
+  
+  .point-games__item {
+    width: 100% !important;
+  }
 }
