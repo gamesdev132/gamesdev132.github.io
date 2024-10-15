@@ -25,8 +25,8 @@
         <div class="statistics__ratio_list">
         <h4>Les pires</h4>
         <div>
-          @for (ratio of bestSixQuiPrendPlayerList; let index = $index; track ratio.playerName) {
-            @if (ratio.wins !== 0){
+          @for (ratio of worstSixQuiPrendPlayerList; let index = $index; track ratio.playerName) {
+            @if (ratio.defeats !== 0){
               <p class="margin-0">
                 {{ 'Top ' + (index + 1) + ' : ' + ratio.playerName + ' : (' + ratio.wins + '/' + ratio.gamesPlayed + ')' }}
               </p>
