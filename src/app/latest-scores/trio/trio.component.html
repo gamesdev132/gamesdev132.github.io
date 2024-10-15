@@ -1,6 +1,9 @@
 <p-carousel
   [value]="scores"
   [showIndicators]="false"
+  [numVisible]="3" 
+  [numScroll]="1"
+  [responsiveOptions]="responsiveOptions">
 >
   <ng-template let-game pTemplate="item">
     <div class="card">
