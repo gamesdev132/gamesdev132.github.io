@@ -19,41 +19,15 @@ import { RatioData } from 'app/@shared/interface/ratio-data';
 export class StatisticsComponent implements OnInit{
   trioRatios: TrioRatio[] = [];
   sixQuiPrendRatios: RoundScoresRatio[] = [];
+  bestSixQuiPrendRatios: RatioData[] = []
+  worstSixQuiPrendRatios: RoundScoresRatio[] = []
+  trioRatioData: RatioData[] = []
 
   constructor(private trioService: TrioService, private gamePointsService: GamePointsService) {
   }
 
   async ngOnInit(): Promise<void> {
     await this.getRatios();
-  }
-
-  get bestSixQuiPrendPlayerList(){
-   return this.sixQuiPrendRatios.sort((ratio1, ratio2) => {
-      if (ratio1.wins > ratio2.wins) return -1;
-      if (ratio1.wins < ratio2.wins) return 1;
-      if (ratio1.gamesPlayed < ratio2.gamesPlayed) return -1;
-      if (ratio1.gamesPlayed > ratio2.gamesPlayed) return 1;
-      return 0;
-    }).slice(0, 3)
-  }
-
-  get worstSixQuiPrendPlayerList(){
-    return this.sixQuiPrendRatios.sort((ratio1, ratio2) => {
-      if (ratio1.defeats > ratio2.defeats) return -1;
-      if (ratio1.defeats < ratio2.defeats) return 1;
-      if (ratio1.gamesPlayed < ratio2.gamesPlayed) return -1;
-      if (ratio1.gamesPlayed > ratio2.gamesPlayed) return 1;
-      return 0;
-    }).slice(0, 3).reverse()
-  }
-
-  get trioRatioData() : RatioData[] {
-    return this.trioRatios.map((value) => {
-      return {
-        name: value.playerName,
-        ratio: `${value.ratio} (${value.wins}/${value.gamesPlayed})`,
-      }
-    })
   }
 
   get sixQuiPrendRatioData() : RatioData[]{
@@ -74,7 +48,48 @@ export class StatisticsComponent implements OnInit{
   }
 
   private async getRatios(): Promise<void> {
-    this.trioRatios = await this.trioService.getRatios();
-    this.sixQuiPrendRatios = await this.gamePointsService.getRatios();
+    await this.trioService.getRatios().then((value) => {
+      this.trioRatios = value;
+      this.initializeRatioDataTrio();
+    });
+    await this.gamePointsService.getRatios().then((value) => {
+      this.sixQuiPrendRatios = value;
+      this.initializeRatioDataLists();
+    });
+  }
+
+  private initializeRatioDataLists() : void{
+    this.bestSixQuiPrendRatios = this.sixQuiPrendRatios
+      .sort((ratio1, ratio2) => {
+        if (ratio1.wins > ratio2.wins) return -1;
+        if (ratio1.wins < ratio2.wins) return 1;
+        if (ratio1.gamesPlayed < ratio2.gamesPlayed) return -1;
+        if (ratio1.gamesPlayed > ratio2.gamesPlayed) return 1;
+        return 0;
+      })
+      .filter((value) => value.wins > 0).map((value) => {
+          return {
+          name: value.playerName,
+          ratio: `(${value.wins}/${value.gamesPlayed})`
+        }
+      })
+
+    this.worstSixQuiPrendRatios = this.sixQuiPrendRatios.filter((value) => value.defeats != 0)
+      .sort((ratio1, ratio2) => {
+        if (ratio1.wins > ratio2.wins) return -1;
+        if (ratio1.wins < ratio2.wins) return 1;
+        if (ratio1.gamesPlayed < ratio2.gamesPlayed) return -1;
+        if (ratio1.gamesPlayed > ratio2.gamesPlayed) return 1;
+        return 0;
+      })
+  }
+
+  private initializeRatioDataTrio(){
+    this.trioRatioData = this.trioRatios.map((value) => {
+      return {
+        name: value.playerName,
+        ratio: `${value.ratio} (${value.wins}/${value.gamesPlayed})`,
+      }
+    })
   }
 }

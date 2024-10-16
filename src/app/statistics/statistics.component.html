@@ -25,7 +25,7 @@
         <div class="statistics__ratio_list">
         <h4>Les perdants</h4>
         <div>
-          @for (ratio of worstSixQuiPrendPlayerList; let index = $index; track ratio.playerName) {
+          @for (ratio of worstSixQuiPrendRatios; let index = $index; track ratio.playerName) {
             @if (ratio.defeats !== 0){
               <p class="margin-0">
                 {{ (index + 1) + '/ ' + ratio.playerName + ' : (' + ratio.wins + '/' + ratio.gamesPlayed + ')' }}
