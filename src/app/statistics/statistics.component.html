@@ -1,39 +1,5 @@
 <div class="statistics">
-  <p-card header="Trio" subheader="Meilleur ratio (parties gagnées/jouéees)" [style]="{margin: '1rem'}">
-    <div class="statistics__scores">
-      <app-podium [podiumData]="trioRatioData"></app-podium>
-      <div class="statistics__ratios">
-        <div class="statistics__ratio-list">
-          @for (ratio of trioRatioData; let i = $index; track ratio.name) {
-            @if(i > 2){
-              <p class="margin-0">
-                {{ (i+1) + '/ ' + ratio.name + ' : ' + ratio.ratio }}
-              </p>
-            }
-          }
-        </div></div>
-    </div>
-  </p-card>
+  <app-statistics-trio [trioRatios]="trioRatios"></app-statistics-trio>
 
-  <p-card header="Six Qui Prend" [style]="{margin: '1rem'}">
-    <div class="statistics__scores">
-      <div>
-        <h4>Les gagnants</h4>
-        <app-podium [podiumData]="sixQuiPrendRatioData"></app-podium>
-      </div>
-      <div class="statistics__ratios">
-        <div class="statistics__ratio_list">
-        <h4>Les perdants</h4>
-        <div>
-          @for (ratio of worstSixQuiPrendRatios; let index = $index; track ratio.playerName) {
-            @if (ratio.defeats !== 0){
-              <p class="margin-0">
-                {{ (index + 1) + '/ ' + ratio.playerName + ' : (' + ratio.wins + '/' + ratio.gamesPlayed + ')' }}
-              </p>
-            }
-          }   
-        </div></div>
-      </div>
-    </div>
-  </p-card>
+  <app-statistics-point-games [gamesListRatio]="sixQuiPrendRatios"></app-statistics-point-games>
 </div>

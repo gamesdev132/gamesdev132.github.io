@@ -1,0 +1,21 @@
+<p-card header="Six Qui Prend" [style]="{margin: '1rem'}">
+    <div class="statistics__scores">
+      <div>
+        <h4>Les gagnants</h4>
+        <app-podium [podiumData]="bestPointGamesRatios"></app-podium>
+      </div>
+      <div class="statistics__ratios">
+        <div class="statistics__ratio_list">
+        <h4>Les perdants</h4>
+        <div>
+          @for (ratio of worstPointGamesRatios; let index = $index; track ratio.playerName) {
+            @if (ratio.defeats !== 0){
+              <p class="margin-0">
+                {{ (index + 1) + '/ ' + ratio.playerName + ' : (' + ratio.wins + '/' + ratio.gamesPlayed + ')' }}
+              </p>
+            }
+          }   
+        </div></div>
+      </div>
+    </div>
+  </p-card>

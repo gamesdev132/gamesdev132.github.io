@@ -1,0 +1,53 @@
+:host {
+    .margin-0 {
+      margin: 0;
+    }
+  
+    .statistics {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    ::ng-deep .p-card-content {
+      padding: 0;
+    }
+  
+    @media (max-width: 500px) {
+      .statistics__scores {
+        flex-direction: column !important;
+      }
+  
+      .statistics__ratio-list {
+        display: flex !important;
+        padding: 0 1rem 0 1rem !important;
+      }
+    }
+  
+    .statistics__scores {
+      display: flex;
+      flex-direction: row;
+    }
+  
+    .statistics__ratios {
+      display: flex;
+      padding: 1rem 0 0 0;
+      justify-content: center;
+    }
+  
+    .statistics__ratio-list {
+      padding: 0 0 0 1rem;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.4;
+    }
+  
+    .statistics__scores {
+      display: flex;
+    }
+  
+    h4 {
+      text-align: center;
+    }
+  }
+  
