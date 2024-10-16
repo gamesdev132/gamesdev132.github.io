@@ -90,7 +90,7 @@ export class GamePointsService {
     })
 
     ratios = ratios.filter((ratio: RoundScoresRatio) => ratio.gamesPlayed !== 0)
-    return ratios//.sort((a, b) => this.compareRatios(a, b))
+    return ratios;
   }
 
   private getCollection(game: string) {

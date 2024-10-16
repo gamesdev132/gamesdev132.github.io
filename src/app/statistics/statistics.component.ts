@@ -44,7 +44,7 @@ export class StatisticsComponent implements OnInit{
       if (ratio1.gamesPlayed < ratio2.gamesPlayed) return -1;
       if (ratio1.gamesPlayed > ratio2.gamesPlayed) return 1;
       return 0;
-    }).slice(0, 3)
+    }).slice(0, 3).reverse()
   }
 
   get trioRatioData() : RatioData[] {
@@ -57,10 +57,20 @@ export class StatisticsComponent implements OnInit{
   }
 
   get sixQuiPrendRatioData() : RatioData[]{
-    return this.sixQuiPrendRatios.filter((value) => value.wins > 0).map((value) => {return {
-      name: value.playerName,
-      ratio: `(${value.wins}/${value.gamesPlayed})`
-    }})
+    return this.sixQuiPrendRatios
+      .sort((ratio1, ratio2) => {
+        if (ratio1.wins > ratio2.wins) return -1;
+        if (ratio1.wins < ratio2.wins) return 1;
+        if (ratio1.gamesPlayed < ratio2.gamesPlayed) return -1;
+        if (ratio1.gamesPlayed > ratio2.gamesPlayed) return 1;
+        return 0;
+      })
+      .filter((value) => value.wins > 0).map((value) => {
+          return {
+          name: value.playerName,
+          ratio: `(${value.wins}/${value.gamesPlayed})`
+        }
+      })
   }
 
   private async getRatios(): Promise<void> {
