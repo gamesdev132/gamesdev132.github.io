@@ -82,6 +82,7 @@ export class StatisticsComponent implements OnInit{
         if (ratio1.gamesPlayed > ratio2.gamesPlayed) return 1;
         return 0;
       })
+      .reverse()
   }
 
   private initializeRatioDataTrio(){
