@@ -60,9 +60,9 @@ export class GamePointsService {
     return gamePointsScores
   }
 
-  async getRatios(): Promise<RoundScoresRatio[]> {
+  async getRatios(gameName: string = 'SixQuiPrend'): Promise<RoundScoresRatio[]> {
     const players: string[] = await this.playersService.getPlayerList();
-    const scores: GamePointsScores[] = await this.getScoresFromLastXDays('SixQuiPrend', 31)
+    const scores: GamePointsScores[] = await this.getScoresFromLastXDays(gameName, 31)
     let ratios: RoundScoresRatio[] = []
 
     players.forEach((player: string) => {

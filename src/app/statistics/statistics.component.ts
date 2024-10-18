@@ -21,6 +21,7 @@ import { StatisticsTrioComponent } from "./statistics-trio/statistics-trio.compo
 export class StatisticsComponent implements OnInit{
   trioRatios: TrioRatio[] = [];
   sixQuiPrendRatios: RoundScoresRatio[] = [];
+  hiloRatios: RoundScoresRatio[] = [];
 
   constructor(private trioService: TrioService, private gamePointsService: GamePointsService) {
   }
@@ -35,6 +36,9 @@ export class StatisticsComponent implements OnInit{
     });
     await this.gamePointsService.getRatios().then((value) => {
       this.sixQuiPrendRatios = value;
+    });
+    await this.gamePointsService.getRatios('Hilo').then((value) => {
+      this.hiloRatios = value;
     });
   }
 }

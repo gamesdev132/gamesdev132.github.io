@@ -13,6 +13,7 @@ import { RatioData } from 'app/@shared/interface/ratio-data';
 })
 export class StatisticsPointGamesComponent implements OnChanges{
   @Input({required: true}) gamesListRatio!: RoundScoresRatio[];
+  @Input({required: true}) gameName!: string;
   bestPointGamesRatios: RatioData[] = []
   worstPointGamesRatios: RoundScoresRatio[] = []
 
