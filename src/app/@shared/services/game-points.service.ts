@@ -68,6 +68,7 @@ export class GamePointsService {
     players.forEach((player: string) => {
       ratios.push({
         playerName: player,
+        topThree: 0,
         wins: 0,
         defeats: 0,
         gamesPlayed: 0
@@ -81,6 +82,10 @@ export class GamePointsService {
           playerRatio.gamesPlayed++;
           if (player.isWinner) {
             playerRatio.wins++;
+            playerRatio.topThree++;
+          }
+          if(player.isSecond || player.isThird){
+            playerRatio.topThree++;
           }
           if (player.isLooser) {
             playerRatio.defeats++

@@ -15,6 +15,7 @@ export class StatisticsPointGamesComponent implements OnChanges{
   @Input({required: true}) gamesListRatio!: RoundScoresRatio[];
   @Input({required: true}) gameName!: string;
   bestPointGamesRatios: RatioData[] = []
+  topThreePointGamesRatios: RoundScoresRatio[] = []
   worstPointGamesRatios: RoundScoresRatio[] = []
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -30,6 +31,8 @@ export class StatisticsPointGamesComponent implements OnChanges{
         if (ratio1.wins < ratio2.wins) return 1;
         if (ratio1.gamesPlayed < ratio2.gamesPlayed) return -1;
         if (ratio1.gamesPlayed > ratio2.gamesPlayed) return 1;
+        if (ratio1.defeats < ratio2.defeats) return -1;
+        if (ratio1.defeats > ratio2.defeats) return 1;
         return 0;
       })
       .filter((value) => value.wins > 0).map((value) => {
@@ -39,12 +42,29 @@ export class StatisticsPointGamesComponent implements OnChanges{
         }
       })
 
-    this.worstPointGamesRatios = this.gamesListRatio.filter((value) => value.defeats != 0)
+    this.topThreePointGamesRatios = this.gamesListRatio
+      .filter((ratio) => ratio.topThree > 0)
       .sort((ratio1, ratio2) => {
+        if (ratio1.topThree > ratio2.topThree) return -1;
+        if (ratio1.topThree < ratio2.topThree) return 1;
+        if (ratio1.gamesPlayed < ratio2.gamesPlayed) return -1
+        if (ratio1.gamesPlayed > ratio2.gamesPlayed) return 1
         if (ratio1.wins > ratio2.wins) return -1;
         if (ratio1.wins < ratio2.wins) return 1;
-        if (ratio1.gamesPlayed < ratio2.gamesPlayed) return -1;
-        if (ratio1.gamesPlayed > ratio2.gamesPlayed) return 1;
+        if (ratio1.defeats > ratio2.defeats) return -1
+        if (ratio1.defeats < ratio2.defeats) return 1
+        return 0;
+      })
+      .slice(0,3)
+
+    this.worstPointGamesRatios = this.gamesListRatio.filter((value) => value.defeats != 0)
+      .sort((ratio1, ratio2) => {
+        if (ratio1.defeats < ratio2.defeats) return -1;
+        if (ratio1.defeats > ratio2.defeats) return 1;
+        if (ratio1.wins > ratio2.wins) return -1;
+        if (ratio1.wins < ratio2.wins) return 1;
+        if (ratio1.gamesPlayed > ratio2.gamesPlayed) return -1;
+        if (ratio1.gamesPlayed < ratio2.gamesPlayed) return 1;
         return 0;
       })
       .reverse()
