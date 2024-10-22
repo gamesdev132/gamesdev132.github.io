@@ -6,7 +6,7 @@ import { GamePointsScores } from "app/@shared/interface/game-points-scores";
 import { HiloParams, SixQuiPrendParams } from "app/@shared/params/game-points-parms";
 import { GamePointsService } from "app/@shared/services/game-points.service";
 import { PlayersService } from "app/@shared/services/players.service";
-import { RoundScoresGameHelper } from "app/new-scores/round-scores-game/round-scores-game.helper";
+import { RoundScoresGameHelper } from "app/new-scores/components/round-scores-game/round-scores-game.helper";
 import { ConfirmationService, MessageService } from "primeng/api";
 import { Button } from "primeng/button";
 import { ConfirmDialogModule } from "primeng/confirmdialog";

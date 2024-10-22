@@ -3,14 +3,19 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { MegaMenuItem } from "primeng/api";
 import { MegaMenuModule } from "primeng/megamenu";
-import { NewGameScoresComponent } from "./new-scores/new-game-scores/new-game-scores.component";
+import { NewGameScoresComponent } from "./new-scores/components/new-game-scores/new-game-scores.component";
 import { StatisticsComponent } from "./statistics/components/statistics.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,
-    NewGameScoresComponent, StatisticsComponent, MegaMenuModule, NgClass],
+  imports: [
+    RouterOutlet,
+    NewGameScoresComponent, 
+    StatisticsComponent, 
+    MegaMenuModule, 
+    NgClass
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
