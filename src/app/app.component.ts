@@ -4,7 +4,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import { MegaMenuItem } from "primeng/api";
 import { MegaMenuModule } from "primeng/megamenu";
 import { NewGameScoresComponent } from "./new-scores/new-game-scores/new-game-scores.component";
-import { StatisticsComponent } from "./statistics/statistics.component";
+import { StatisticsComponent } from "./statistics/components/statistics.component";
 
 @Component({
   selector: 'app-root',

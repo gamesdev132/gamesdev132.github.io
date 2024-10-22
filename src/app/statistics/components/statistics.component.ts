@@ -7,7 +7,7 @@ import { TrioService } from "app/@shared/services/trio.service";
 import { CardModule } from 'primeng/card';
 import { DropdownModule } from "primeng/dropdown";
 import { PodiumComponent } from './podium/podium.component';
-import { PointGamesComponent } from "../latest-scores/point-games/point-games.component";
+import { PointGamesComponent } from "../../latest-scores/point-games/point-games.component";
 import { StatisticsPointGamesComponent } from "./statistics-point-games/statistics-point-games.component";
 import { StatisticsTrioComponent } from "./statistics-trio/statistics-trio.component";
 

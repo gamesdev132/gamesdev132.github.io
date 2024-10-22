@@ -1,11 +1,11 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { RoundScoresRatio } from 'app/@shared/interface/roundScoresRatio';
-import { PodiumComponent } from "app/statistics/podium/podium.component";
+import { PodiumComponent } from "app/statistics/components/podium/podium.component";
 import { CardModule } from 'primeng/card';
 import { RatioData } from 'app/@shared/interface/ratio-data';
-import { SortCriteria } from '../interfaces/sort-criteria.interface';
-import { Order } from '../enums/order.enum';
-import { FilterKey } from '../enums/filter-key.enum';
+import { SortCriteria } from '../../interfaces/sort-criteria.interface';
+import { Order } from '../../enums/order.enum';
+import { FilterKey } from '../../enums/filter-key.enum';
 
 @Component({
   selector: 'app-statistics-point-games',
