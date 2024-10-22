@@ -3,6 +3,9 @@ import { RoundScoresRatio } from 'app/@shared/interface/roundScoresRatio';
 import { PodiumComponent } from "app/statistics/podium/podium.component";
 import { CardModule } from 'primeng/card';
 import { RatioData } from 'app/@shared/interface/ratio-data';
+import { SortCriteria } from '../interfaces/sort-criteria.interface';
+import { Order } from '../enums/order.enum';
+import { FilterKey } from '../enums/filter-key.enum';
 
 @Component({
   selector: 'app-statistics-point-games',
@@ -26,15 +29,12 @@ export class StatisticsPointGamesComponent implements OnChanges{
 
   private initializeRatioDataLists() : void{
     this.bestPointGamesRatios = this.gamesListRatio
-      .sort((ratio1, ratio2) => {
-        if (ratio1.wins > ratio2.wins) return -1;
-        if (ratio1.wins < ratio2.wins) return 1;
-        if (ratio1.gamesPlayed < ratio2.gamesPlayed) return -1;
-        if (ratio1.gamesPlayed > ratio2.gamesPlayed) return 1;
-        if (ratio1.defeats < ratio2.defeats) return -1;
-        if (ratio1.defeats > ratio2.defeats) return 1;
-        return 0;
-      })
+      .sort(this.sortBy([
+        {key: FilterKey.Wins, order: Order.Desc}, 
+        {key: FilterKey.GamesPlayed, order: Order.Asc},
+        {key: FilterKey.Defeats, order: Order.Desc}, 
+        {key: FilterKey.TopThree, order: Order.Desc}
+      ]))
       .filter((value) => value.wins > 0).map((value) => {
           return {
           name: value.playerName,
@@ -44,29 +44,31 @@ export class StatisticsPointGamesComponent implements OnChanges{
 
     this.topThreePointGamesRatios = this.gamesListRatio
       .filter((ratio) => ratio.topThree > 0)
-      .sort((ratio1, ratio2) => {
-        if (ratio1.topThree > ratio2.topThree) return -1;
-        if (ratio1.topThree < ratio2.topThree) return 1;
-        if (ratio1.gamesPlayed < ratio2.gamesPlayed) return -1
-        if (ratio1.gamesPlayed > ratio2.gamesPlayed) return 1
-        if (ratio1.wins > ratio2.wins) return -1;
-        if (ratio1.wins < ratio2.wins) return 1;
-        if (ratio1.defeats > ratio2.defeats) return -1
-        if (ratio1.defeats < ratio2.defeats) return 1
-        return 0;
-      })
+      .sort(this.sortBy([
+        {key: FilterKey.TopThree, order: Order.Desc}, 
+        {key: FilterKey.GamesPlayed, order: Order.Asc},
+        {key: FilterKey.Wins, order: Order.Desc}, 
+        {key: FilterKey.Defeats, order: Order.Desc}
+      ]))
       .slice(0,3)
 
-    this.worstPointGamesRatios = this.gamesListRatio.filter((value) => value.defeats != 0)
-      .sort((ratio1, ratio2) => {
-        if (ratio1.defeats < ratio2.defeats) return -1;
-        if (ratio1.defeats > ratio2.defeats) return 1;
-        if (ratio1.wins > ratio2.wins) return -1;
-        if (ratio1.wins < ratio2.wins) return 1;
-        if (ratio1.gamesPlayed > ratio2.gamesPlayed) return -1;
-        if (ratio1.gamesPlayed < ratio2.gamesPlayed) return 1;
-        return 0;
-      })
+    this.worstPointGamesRatios = this.gamesListRatio
+    .filter((value) => value.defeats != 0)
+      .sort(this.sortBy([
+        {key: FilterKey.Defeats, order: Order.Asc}, 
+        {key: FilterKey.Wins, order: Order.Desc}, 
+        {key: FilterKey.GamesPlayed, order: Order.Desc}
+      ]))
       .reverse()
+  }
+
+  private sortBy(criteriaList: SortCriteria[]) {
+    return (ratio1: RoundScoresRatio, ratio2: RoundScoresRatio): number => {
+      for (const { key, order } of criteriaList) {
+        const compare = order === Order.Asc ? ratio1[key] - ratio2[key] : ratio2[key] - ratio1[key];
+        if (compare !== 0) return compare;
+      }
+      return 0;
+    };
   }
 }
