@@ -3,9 +3,9 @@ import { GamePointsScores } from "app/@shared/interface/game-points-scores";
 import { Trio } from "app/@shared/interface/trio";
 import { GamePointsService } from "app/@shared/services/game-points.service";
 import { TrioService } from "app/@shared/services/trio.service";
-import { EmptyStateComponent } from "app/latest-scores/empty-state/empty-state.component";
-import { PointGamesComponent } from "app/latest-scores/point-games/point-games.component";
-import { TrioComponent } from "app/latest-scores/trio/trio.component";
+import { EmptyStateComponent } from "app/latest-scores/components/empty-state/empty-state.component";
+import { PointGamesComponent } from "app/latest-scores/components/point-games/point-games.component";
+import { TrioComponent } from "app/latest-scores/components/trio/trio.component";
 import { CarouselModule } from "primeng/carousel";
 
 @Component({
