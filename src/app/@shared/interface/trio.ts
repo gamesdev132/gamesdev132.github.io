@@ -4,4 +4,5 @@ export interface Trio{
   date: Timestamp,
   players: string[];
   winner: string;
+  isDuo?: boolean;
 }

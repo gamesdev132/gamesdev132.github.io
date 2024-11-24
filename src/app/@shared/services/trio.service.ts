@@ -50,10 +50,16 @@ export class TrioService {
     scores.forEach((score: Trio): void => {
       score.players.forEach((player: string) => {
         const playerRatio = ratios.find((ratio: TrioRatio): boolean => ratio.playerName === player)
-        if (playerRatio) playerRatio.gamesPlayed++
+        if (playerRatio) {
+          if (score.isDuo) playerRatio.gamesPlayed += 0.5
+          else playerRatio.gamesPlayed++
+        }
       })
       const winnerRatio = ratios.find((ratio: TrioRatio): boolean => score.winner === ratio.playerName)
-      if (winnerRatio) winnerRatio.wins++
+      if (winnerRatio) {
+        if (score.isDuo) winnerRatio.wins += 0.5
+        else winnerRatio.wins++
+      }
     })
 
     ratios = ratios.filter((ratio: TrioRatio) => ratio.gamesPlayed > 4)
