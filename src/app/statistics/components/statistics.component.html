@@ -1,6 +1,10 @@
 <div class="statistics">
   <app-statistics-trio [trioRatios]="trioRatios"></app-statistics-trio>
 
-  <app-statistics-point-games [gamesListRatio]="sixQuiPrendRatios" gameName="SixQuiPrend"></app-statistics-point-games>
-  <app-statistics-point-games [gamesListRatio]="hiloRatios" gameName="Hilo"></app-statistics-point-games>
+  @if(sixQuiPrendRatios.length){
+    <app-statistics-point-games [gamesListRatio]="sixQuiPrendRatios" gameName="SixQuiPrend"></app-statistics-point-games>
+  }
+  @if(hiloRatios.length) {
+    <app-statistics-point-games [gamesListRatio]="hiloRatios" gameName="Hilo"></app-statistics-point-games>
+  }
 </div>
