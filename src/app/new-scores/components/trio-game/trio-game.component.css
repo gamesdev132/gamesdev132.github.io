@@ -29,4 +29,22 @@
   justify-content: space-evenly;
 }
 
+.buttons {
+  display: flex;
+  justify-content: space-around;
+}
 
+.duo-switch {
+  display: flex;
+  align-items: center;
+}
+
+.duo-switch__label {
+  padding: 0 0.75rem 0.15rem 0;
+}
+
+.message {
+  margin: 0.5rem 1rem;
+  display: flex;
+  justify-content: center;
+}

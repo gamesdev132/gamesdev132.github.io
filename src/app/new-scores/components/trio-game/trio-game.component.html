@@ -17,7 +17,20 @@
                 [disabled]="disablePlayerAdding" title="Ajouter un joueur"/>
     </div>
   </div>
-  <div class="save-button">
+  @if (formHelper.isDuo()){
+    <div class="message">
+      <p-messages 
+        [(value)]="messages"
+        [enableService]="false" 
+        [closable]="false"
+        ></p-messages>
+    </div>
+  }
+  <div class="buttons">
+    <div class="duo-switch">    
+      <label for="duoSwith" class="duo-switch__label">Duo</label>
+      <p-inputSwitch formControlName="isDuo" inputId="duoSwith"/>
+    </div>
     <p-button icon="pi pi-save" type="submit" label="Enregistrer" [disabled]="isFormDisabled"/>
   </div>
 </form>

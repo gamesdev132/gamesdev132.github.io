@@ -18,9 +18,14 @@ export class TrioGameHelper {
     return this.form;
   }
 
+  isDuo(): boolean{
+    return this.form.get('isDuo')?.value
+  }
+
   initializeForm(): void {
     this.form = new FormGroup<any>({
-      players: new FormArray([], [Validators.minLength(3), Validators.maxLength(7)])
+      players: new FormArray([], [Validators.minLength(3), Validators.maxLength(7)]),
+      isDuo: new FormControl(false)
     });
 
     for (let i: number = 0; i < 3; i++) {
@@ -44,11 +49,18 @@ export class TrioGameHelper {
   formatForAPI(): Trio {
     const players: TrioPlayer[] = this.form.get('players')?.value as TrioPlayer[] ?? []
 
-    return {
+    const trioGame = {
       players: players.map((player: TrioPlayer) => player.name),
       winner: players.find((player: TrioPlayer) => player.win)?.name ?? '',
       date: Timestamp.now()
+    } as Trio
+
+    const isDuoValue = this.form.get('isDuo')?.value;
+    if (isDuoValue) {
+      trioGame.isDuo = isDuoValue;
     }
+
+    return trioGame
   }
 
   private createEntity(): FormGroup {

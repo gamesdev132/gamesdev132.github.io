@@ -1,23 +1,23 @@
-import { NgClass } from "@angular/common";
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { Router } from "@angular/router";
 import { TrioPlayer } from "app/@shared/interface/trioPlayer";
 import { PlayersService } from "app/@shared/services/players.service";
 import { TrioService } from "app/@shared/services/trio.service";
-import { ConfirmationService, MessageService } from "primeng/api";
+import { ConfirmationService, Message, MessageService } from "primeng/api";
 import { AutoCompleteModule } from "primeng/autocomplete";
 import { ButtonModule } from "primeng/button";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { DropdownModule } from "primeng/dropdown";
 import { InputTextModule } from "primeng/inputtext";
 import { ToastModule } from "primeng/toast";
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { MessagesModule } from 'primeng/messages';
 import { TrioGameHelper } from "./trio-game.helper";
 
 @Component({
   selector: 'app-trio-game',
   standalone: true,
-  imports: [FormsModule, InputTextModule, ButtonModule, ReactiveFormsModule, NgClass, ConfirmDialogModule, ToastModule, AutoCompleteModule, DropdownModule],
+  imports: [FormsModule, InputTextModule, ButtonModule, ReactiveFormsModule, MessagesModule, InputSwitchModule, ConfirmDialogModule, ToastModule, AutoCompleteModule, DropdownModule],
   providers: [ConfirmationService, MessageService],
   templateUrl: './trio-game.component.html',
   styleUrl: './trio-game.component.css',
@@ -25,16 +25,17 @@ import { TrioGameHelper } from "./trio-game.helper";
 export class TrioGameComponent implements OnInit {
   formHelper!: TrioGameHelper;
   playerList: string[] = [];
+  messages!: Message[];
 
   constructor(
     private trioService: TrioService,
-    private router: Router,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private playersService: PlayersService) {
   }
 
   async ngOnInit(): Promise<void> {
+    this.messages = [{ severity: 'info', detail: 'Il faut toujours enregistré les deux parties en mode Duo :)' }];
     this.formHelper = new TrioGameHelper();
     this.playerList = await this.playersService.getPlayerList()
   }
