@@ -59,7 +59,7 @@ export class StatisticsPointGamesComponent implements OnChanges{
         {key: FilterKey.Wins, order: Order.Desc}, 
         {key: FilterKey.GamesPlayed, order: Order.Desc}
       ]))
-      .reverse()
+      .reverse().slice(0,3  )
   }
 
   private sortBy(criteriaList: SortCriteria[]) {

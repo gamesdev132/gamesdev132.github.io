@@ -1,13 +1,13 @@
 <p-card [header]="gameName" [style]="{margin: '1rem'}">
     <div class="statistics__scores">
       <div>
-        <h4>Les gagnants</h4>
+        <h4 class="statistics__sub-title">Les gagnants</h4>
         <app-podium [podiumData]="bestPointGamesRatios"></app-podium>
       </div>
       <div class="statistics__right">
         <div class="statistics__ratios">
           <div class="statistics__ratio_list">
-            <h4>Les perdants</h4>
+            <h4 class="statistics__sub-title">Les perdants</h4>
             <div>
               @for (ratio of worstPointGamesRatios; let index = $index; track ratio.playerName) {
                 <p class="margin-0">
@@ -19,7 +19,7 @@
         </div>
         <div class="statistics__ratios">
           <div class="statistics__ratio_list">
-            <h4>Les plus constants (top3)</h4>
+            <h4 class="statistics__sub-title">Les plus constants (top3)</h4>
             <div>
               @for (ratio of topThreePointGamesRatios; let index = $index; track ratio.playerName) {
                 <p class="margin-0">
