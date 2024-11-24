@@ -56,7 +56,7 @@ export class TrioService {
       if (winnerRatio) winnerRatio.wins++
     })
 
-    ratios = ratios.filter((ratio: TrioRatio) => ratio.gamesPlayed !== 0)
+    ratios = ratios.filter((ratio: TrioRatio) => ratio.gamesPlayed > 4)
     ratios.forEach((ratio: TrioRatio) => {
       ratio.ratio = parseFloat((ratio.wins / ratio.gamesPlayed).toFixed(3))
     })
