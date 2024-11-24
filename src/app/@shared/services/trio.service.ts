@@ -72,8 +72,8 @@ export class TrioService {
   private compareRatios(a: TrioRatio, b: TrioRatio): number {
     if (a.ratio > b.ratio) return -1;
     if (a.ratio < b.ratio) return 1;
-    if (a.gamesPlayed < b.gamesPlayed) return -1;
-    if (a.gamesPlayed > b.gamesPlayed) return 1;
+    if (a.gamesPlayed > b.gamesPlayed) return -1;
+    if (a.gamesPlayed < b.gamesPlayed) return 1;
     return 0;
   };
 }
