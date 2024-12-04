@@ -71,9 +71,8 @@ export class RoundScoresGameHelper {
   private createEntity(): FormGroup {
     return new FormGroup<any>({
       name: new FormControl(null, Validators.required),
-      points: new FormArray([
-        new FormControl(null, Validators.required),
-      ]),
+      points: new FormArray(Array.from({ length: this.numberOfRounds }, () => new FormControl(null, Validators.required))
+    ),
       total: new FormControl({value: null, disabled: true}),
     });
   }
