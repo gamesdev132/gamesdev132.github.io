@@ -16,6 +16,7 @@ import { Trio } from '../interface/trio';
   providedIn: 'root',
 })
 export class TrioService {
+  private scores: Trio[] = [];
   private readonly trioCollection;
 
   constructor(
@@ -23,6 +24,23 @@ export class TrioService {
     private playersService: PlayersService,
   ) {
     this.trioCollection = collection(this.firestore, 'trio');
+  }
+
+  async getScores(): Promise<Trio[]> {
+    if (!this.scores.length) {
+      this.scores = await this.getScoresFromLastXDays();
+    } else {
+      const dayScores = await this.getScoresFromLastXDays(1);
+      this.scores.forEach((score) => {
+        dayScores.forEach((dayScore, index) => {
+          if (score.id === dayScore.id) {
+            dayScores.splice(index, 1);
+          }
+        });
+      });
+      this.scores = dayScores.concat(this.scores);
+    }
+    return this.scores;
   }
 
   async saveGame(scores: Trio): Promise<void> {
@@ -38,12 +56,18 @@ export class TrioService {
         orderBy('date', 'desc'),
       ),
     );
-    return querySnapshot.docs.map((doc) => doc.data() as Trio);
+    return querySnapshot.docs.map(
+      (doc) =>
+        ({
+          id: doc.id,
+          ...doc.data(),
+        }) as Trio,
+    );
   }
 
   async getRatios(): Promise<TrioRatio[]> {
     const players: string[] = await this.playersService.getPlayerList();
-    const scores: Trio[] = await this.getScoresFromLastXDays(31);
+    const scores: Trio[] = await this.getScores();
     let ratios: TrioRatio[] = [];
 
     players.forEach((player: string) => {

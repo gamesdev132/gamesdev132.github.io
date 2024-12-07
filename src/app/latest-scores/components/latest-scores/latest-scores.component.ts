@@ -37,7 +37,7 @@ export class LatestScoresComponent implements OnInit {
   }
 
   private async getTrioLatestScores(): Promise<void> {
-    this.trioScores = await this.trioService.getScoresFromLastXDays();
+    this.trioScores = await this.trioService.getScores();
   }
 
   private async getSixQuiPrendLatestScores(): Promise<void> {

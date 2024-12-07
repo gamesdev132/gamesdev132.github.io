@@ -11,4 +11,5 @@ export const routes: Routes = [
   { path: 'scores/new', component: ChooseGameComponent },
   { path: 'player/new', component: NewPlayerComponent },
   { path: 'stats', component: TrioComponent },
+  { path: '**', redirectTo: '/' },
 ];
