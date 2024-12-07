@@ -1,4 +1,5 @@
 import { FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
+import { GamePointsFormPlayer } from "app/@shared/interface/game-points-form";
 import { GamePointsParams } from "app/@shared/interface/game-points-params";
 import { GamePointsPlayer, GamePointsScores } from "app/@shared/interface/game-points-scores";
 import { TrioPlayer } from "app/@shared/interface/trioPlayer";
@@ -22,6 +23,23 @@ export class RoundScoresGameHelper {
 
   getForm(): FormGroup {
     return this.form;
+  }
+
+  fillForm(storedScores : GamePointsFormPlayer[]): void {
+    const playerToAdd = storedScores.length - 2
+    const playersArray = this.form.get(this.PLAYERS_KEY) as FormArray;
+
+    for (let i = 0; i < playerToAdd; i++){
+      this.addPlayer();
+    }
+    storedScores.forEach((player, index) => {
+      const playerGroup = playersArray.at(index) as FormGroup;
+      playerGroup.patchValue({
+        name: player.name,
+        points: [player.total],
+        total: player.total,
+      });
+    });
   }
 
   initializeForm(): void {
@@ -56,7 +74,7 @@ export class RoundScoresGameHelper {
   }
 
   formatForAPI(): GamePointsScores {
-    const players: GamePointsPlayer[] = this.players.getRawValue().map((player: any) => {
+    const players: GamePointsPlayer[] = this.players.getRawValue().map((player: GamePointsPlayer) => {
       return {
         name: player.name,
         total: player.total,
@@ -68,11 +86,17 @@ export class RoundScoresGameHelper {
     };
   }
 
+  formatForLocalSave(): GamePointsFormPlayer[] {  
+    return this.players.getRawValue().map((player: GamePointsPlayer) => ({
+        name: player.name,
+        total: player.total,
+      }));
+  }
+
   private createEntity(): FormGroup {
     return new FormGroup<any>({
       name: new FormControl(null, Validators.required),
-      points: new FormArray(Array.from({ length: this.numberOfRounds }, () => new FormControl(null, Validators.required))
-    ),
+      points: new FormArray(Array.from({ length: this.numberOfRounds }, () => new FormControl(null, Validators.required))),
       total: new FormControl({value: null, disabled: true}),
     });
   }

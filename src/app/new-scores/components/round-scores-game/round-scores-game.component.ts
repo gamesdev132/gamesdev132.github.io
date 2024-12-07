@@ -5,6 +5,7 @@ import { GamePointsParams } from "app/@shared/interface/game-points-params";
 import { GamePointsScores } from "app/@shared/interface/game-points-scores";
 import { HiloParams, SixQuiPrendParams } from "app/@shared/params/game-points-parms";
 import { GamePointsService } from "app/@shared/services/game-points.service";
+import { LocalStorageService } from 'app/@shared/services/local-storage.service';
 import { PlayersService } from "app/@shared/services/players.service";
 import { RoundScoresGameHelper } from "app/new-scores/components/round-scores-game/round-scores-game.helper";
 import { ConfirmationService, MessageService } from "primeng/api";
@@ -40,9 +41,9 @@ export class RoundScoresGameComponent implements OnInit {
   constructor(
     private playersService: PlayersService,
     private gamePointsService: GamePointsService,
-    private router: Router,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService) {
+    private confirmationService: ConfirmationService,
+    private localStorageService: LocalStorageService) {
   }
 
   async ngOnInit(): Promise<void> {
@@ -51,6 +52,7 @@ export class RoundScoresGameComponent implements OnInit {
     if (this.gameName === 'Hilo') {
       this.gamePointsParams = HiloParams;
     }
+    this.formHelper.fillForm(this.localStorageService.getGamePoints())
   }
 
   get isFormDisabled(): boolean {
@@ -80,6 +82,7 @@ export class RoundScoresGameComponent implements OnInit {
       total += val.value;
     })
     this.players.at(index).get('total')?.setValue(total)
+    this.localStorageService.setGamePoints(this.formHelper.formatForLocalSave())
   }
 
   get numberOfRounds(): number {
@@ -124,6 +127,7 @@ export class RoundScoresGameComponent implements OnInit {
   private async confirmSubmit(): Promise<void> {
     await this.gamePointsService.saveGame(this.formHelper.formatForAPI(), this.gameName).then((): void => {
       this.showMessage()
+      this.localStorageService.emptyGamePoints()
       this.form.reset()
     }).catch((): void => {
       this.showError()
