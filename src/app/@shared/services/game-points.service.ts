@@ -132,6 +132,8 @@ export class GamePointsService {
   }
 
   private getCollection(game: string) {
-    return game === GameEnum.Hilo ? this.HiloCollection : this.SixQuiPrendCollection;
+    return game === GameEnum.Hilo
+      ? this.HiloCollection
+      : this.SixQuiPrendCollection;
   }
 }

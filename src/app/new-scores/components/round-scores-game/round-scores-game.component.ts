@@ -40,7 +40,8 @@ import { ToastModule } from 'primeng/toast';
   styleUrl: './round-scores-game.component.css',
 })
 export class RoundScoresGameComponent implements OnInit {
-  @Input() gameName: GameEnum.SixQuiPrend | GameEnum.Hilo = GameEnum.SixQuiPrend;
+  @Input() gameName: GameEnum.SixQuiPrend | GameEnum.Hilo =
+    GameEnum.SixQuiPrend;
   gamePointsParams: GamePointsParams = SixQuiPrendParams;
   formHelper!: RoundScoresGameHelper;
   playerList: string[] = [];
@@ -60,7 +61,7 @@ export class RoundScoresGameComponent implements OnInit {
       this.gamePointsParams = HiloParams;
     }
     const localStorageData = this.localStorageService.getGamePoints();
-    if (localStorageData){
+    if (localStorageData) {
       this.formHelper.fillForm(localStorageData);
     }
   }
@@ -101,7 +102,10 @@ export class RoundScoresGameComponent implements OnInit {
     points.controls.forEach((val) => {
       total += val.value;
     });
-    this.players.at(index).get(this.formHelper.PLAYERS_TOTAL_KEY)?.setValue(total);
+    this.players
+      .at(index)
+      .get(this.formHelper.PLAYERS_TOTAL_KEY)
+      ?.setValue(total);
     this.localStorageService.setGamePoints(
       this.formHelper.formatForLocalSave(),
     );

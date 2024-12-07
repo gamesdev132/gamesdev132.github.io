@@ -47,7 +47,8 @@ export class LatestScoresComponent implements OnInit {
   }
 
   private async getHiloLatestScores(): Promise<void> {
-    this.hiloScores =
-      await this.gamePointsService.getScoresFromLastXDays(GameEnum.Hilo);
+    this.hiloScores = await this.gamePointsService.getScoresFromLastXDays(
+      GameEnum.Hilo,
+    );
   }
 }
