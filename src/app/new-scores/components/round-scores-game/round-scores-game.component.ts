@@ -5,15 +5,16 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { GameEnum } from 'app/@shared/enums/game.enum';
 import { GamePointsParams } from 'app/@shared/interface/game-points-params';
 import {
   HiloParams,
   SixQuiPrendParams,
-} from 'app/@shared/params/game-points-parms';
+} from 'app/new-scores/constants/game-points-parms';
 import { GamePointsService } from 'app/@shared/services/game-points.service';
 import { LocalStorageService } from 'app/@shared/services/local-storage.service';
 import { PlayersService } from 'app/@shared/services/players.service';
-import { RoundScoresGameHelper } from 'app/new-scores/components/round-scores-game/round-scores-game.helper';
+import { RoundScoresGameHelper } from 'app/new-scores/helpers/round-scores-game.helper';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Button } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -39,7 +40,7 @@ import { ToastModule } from 'primeng/toast';
   styleUrl: './round-scores-game.component.css',
 })
 export class RoundScoresGameComponent implements OnInit {
-  @Input() gameName: 'SixQuiPrend' | 'Hilo' = 'SixQuiPrend';
+  @Input() gameName: GameEnum.SixQuiPrend | GameEnum.Hilo = GameEnum.SixQuiPrend;
   gamePointsParams: GamePointsParams = SixQuiPrendParams;
   formHelper!: RoundScoresGameHelper;
   playerList: string[] = [];
@@ -55,7 +56,7 @@ export class RoundScoresGameComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.formHelper = new RoundScoresGameHelper(SixQuiPrendParams);
     this.playerList = await this.playersService.getPlayerList();
-    if (this.gameName === 'Hilo') {
+    if (this.gameName === GameEnum.Hilo) {
       this.gamePointsParams = HiloParams;
     }
     this.formHelper.fillForm(this.localStorageService.getGamePoints());
@@ -85,6 +86,10 @@ export class RoundScoresGameComponent implements OnInit {
     );
   }
 
+  get numberOfRounds(): number {
+    return this.formHelper.numberOfRounds;
+  }
+
   updatePlayerTotal(index: number): void {
     const points = this.players
       .at(index)
@@ -93,14 +98,10 @@ export class RoundScoresGameComponent implements OnInit {
     points.controls.forEach((val) => {
       total += val.value;
     });
-    this.players.at(index).get('total')?.setValue(total);
+    this.players.at(index).get(this.formHelper.PLAYERS_TOTAL_KEY)?.setValue(total);
     this.localStorageService.setGamePoints(
       this.formHelper.formatForLocalSave(),
     );
-  }
-
-  get numberOfRounds(): number {
-    return this.formHelper.numberOfRounds;
   }
 
   getPoints(playerIndex: number) {

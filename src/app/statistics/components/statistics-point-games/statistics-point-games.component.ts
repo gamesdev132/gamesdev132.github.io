@@ -28,6 +28,12 @@ export class StatisticsPointGamesComponent implements OnChanges {
   }
 
   private initializeRatioDataLists(): void {
+    this.initializeBestPointGamesRatios();
+    this.initializeTopThreePointGamesRatios();
+    this.initializeWorstPointGamesRatios();
+  }
+
+  private initializeBestPointGamesRatios(): void {
     this.bestPointGamesRatios = this.gamesListRatio
       .sort(
         this.sortBy([
@@ -44,7 +50,9 @@ export class StatisticsPointGamesComponent implements OnChanges {
           ratio: `(${value.wins}/${value.gamesPlayed})`,
         };
       });
+  }
 
+  private initializeTopThreePointGamesRatios() : void {
     this.topThreePointGamesRatios = this.gamesListRatio
       .filter((ratio) => ratio.topThree > 0)
       .sort(
@@ -56,7 +64,9 @@ export class StatisticsPointGamesComponent implements OnChanges {
         ]),
       )
       .slice(0, 3);
+  }
 
+  private initializeWorstPointGamesRatios() : void {
     this.worstPointGamesRatios = this.gamesListRatio
       .filter((value) => value.defeats != 0)
       .sort(

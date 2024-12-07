@@ -11,6 +11,7 @@ import { Timestamp } from 'firebase/firestore';
 export class RoundScoresGameHelper {
   readonly PLAYERS_KEY = 'players';
   readonly PLAYERS_POINTS_KEY = 'points';
+  readonly PLAYERS_TOTAL_KEY = 'total'
   private form!: FormGroup;
   numberOfRounds: number = 1;
   gameParameters: GamePointsParams;

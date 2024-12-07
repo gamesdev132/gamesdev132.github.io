@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GameEnum } from 'app/@shared/enums/game.enum';
 import { GamePointsScores } from 'app/@shared/interface/game-points-scores';
 import { Trio } from 'app/@shared/interface/trio';
 import { GamePointsService } from 'app/@shared/services/game-points.service';
@@ -42,11 +43,11 @@ export class LatestScoresComponent implements OnInit {
 
   private async getSixQuiPrendLatestScores(): Promise<void> {
     this.sixQuiPrendScores =
-      await this.gamePointsService.getScoresFromLastXDays('SixQuiPrend');
+      await this.gamePointsService.getScoresFromLastXDays(GameEnum.SixQuiPrend);
   }
 
   private async getHiloLatestScores(): Promise<void> {
     this.hiloScores =
-      await this.gamePointsService.getScoresFromLastXDays('Hilo');
+      await this.gamePointsService.getScoresFromLastXDays(GameEnum.Hilo);
   }
 }

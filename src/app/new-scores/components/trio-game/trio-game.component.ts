@@ -18,7 +18,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { MessagesModule } from 'primeng/messages';
-import { TrioGameHelper } from './trio-game.helper';
+import { TrioGameHelper } from '../../helpers/trio-game.helper';
 
 @Component({
   selector: 'app-trio-game',

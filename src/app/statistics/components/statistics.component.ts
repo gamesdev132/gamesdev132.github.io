@@ -8,6 +8,7 @@ import { CardModule } from 'primeng/card';
 import { DropdownModule } from 'primeng/dropdown';
 import { StatisticsPointGamesComponent } from './statistics-point-games/statistics-point-games.component';
 import { StatisticsTrioComponent } from './statistics-trio/statistics-trio.component';
+import { GameEnum } from 'app/@shared/enums/game.enum';
 
 @Component({
   selector: 'app-statistics',
@@ -43,7 +44,7 @@ export class StatisticsComponent implements OnInit {
     await this.gamePointsService.getRatios().then((value) => {
       this.sixQuiPrendRatios = value;
     });
-    await this.gamePointsService.getRatios('Hilo').then((value) => {
+    await this.gamePointsService.getRatios(GameEnum.Hilo).then((value) => {
       this.hiloRatios = value;
     });
   }

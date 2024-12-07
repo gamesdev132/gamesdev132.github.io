@@ -22,7 +22,6 @@ export class TrioComponent implements OnInit {
   faCrown = faCrown;
   faGroup = faPeopleGroup;
   faDate = faCalendarDays;
-
   responsiveOptions: any[] | undefined;
 
   ngOnInit(): void {

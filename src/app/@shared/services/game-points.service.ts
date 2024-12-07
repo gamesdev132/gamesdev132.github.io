@@ -14,6 +14,7 @@ import {
   query,
   Timestamp,
 } from 'firebase/firestore';
+import { GameEnum } from '../enums/game.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -131,9 +132,6 @@ export class GamePointsService {
   }
 
   private getCollection(game: string) {
-    if (game === 'Hilo') {
-      return this.HiloCollection;
-    }
-    return this.SixQuiPrendCollection;
+    return game === GameEnum.Hilo ? this.HiloCollection : this.SixQuiPrendCollection;
   }
 }
