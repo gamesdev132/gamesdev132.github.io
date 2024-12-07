@@ -4,6 +4,7 @@ import { faCalendarDays, faCrown, faPeopleGroup } from '@fortawesome/free-solid-
 import { Trio } from "app/@shared/interface/trio";
 import { CardModule } from "primeng/card";
 import { CarouselModule } from "primeng/carousel";
+import { TagModule } from 'primeng/tag';
 
 @Component({
   selector: 'app-trio',
@@ -11,7 +12,8 @@ import { CarouselModule } from "primeng/carousel";
   imports: [
     CarouselModule,
     CardModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    TagModule
   ],
   templateUrl: './trio.component.html',
   styleUrl: './trio.component.css'

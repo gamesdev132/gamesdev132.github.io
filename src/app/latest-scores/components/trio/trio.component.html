@@ -17,9 +17,14 @@
           <h5>{{ game.date.toDate().toLocaleDateString() }}</h5>
         </div>
       </div>
-      <div class="scores__icon">
-        <fa-icon [icon]="faGroup" [style]="{'font-size': '1.4rem'}"></fa-icon>
-        <p class="line-height">{{ getPlayerList(game.players) }}</p>
+      <div class="scores__list">
+        <div class="scores__icon">
+          <fa-icon [icon]="faGroup" [style]="{'font-size': '1.4rem'}"></fa-icon>
+          <p class="line-height">{{ getPlayerList(game.players) }}</p>
+        </div>
+        @if(game.isDuo){
+          <p-tag value="Duo" />
+        }
       </div>
     </div>
   </ng-template>
