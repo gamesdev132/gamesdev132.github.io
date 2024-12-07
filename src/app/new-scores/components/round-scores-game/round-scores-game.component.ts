@@ -59,7 +59,10 @@ export class RoundScoresGameComponent implements OnInit {
     if (this.gameName === GameEnum.Hilo) {
       this.gamePointsParams = HiloParams;
     }
-    this.formHelper.fillForm(this.localStorageService.getGamePoints());
+    const localStorageData = this.localStorageService.getGamePoints();
+    if (localStorageData){
+      this.formHelper.fillForm(localStorageData);
+    }
   }
 
   get isFormDisabled(): boolean {

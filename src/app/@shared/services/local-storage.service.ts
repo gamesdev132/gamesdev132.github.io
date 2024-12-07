@@ -14,7 +14,8 @@ export class LocalStorageService {
     localStorage.removeItem('points');
   }
 
-  getGamePoints(): GamePointsFormPlayer[] {
-    return JSON.parse(localStorage.getItem('points') ?? '');
+  getGamePoints(): GamePointsFormPlayer[] | null{
+    const localStorageData = localStorage.getItem('points') ?? null;
+    return localStorageData ? JSON.parse(localStorageData) : null
   }
 }
