@@ -1,23 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { TrioPlayer } from "app/@shared/interface/trioPlayer";
-import { PlayersService } from "app/@shared/services/players.service";
-import { TrioService } from "app/@shared/services/trio.service";
-import { ConfirmationService, Message, MessageService } from "primeng/api";
-import { AutoCompleteModule } from "primeng/autocomplete";
-import { ButtonModule } from "primeng/button";
-import { ConfirmDialogModule } from "primeng/confirmdialog";
-import { DropdownModule } from "primeng/dropdown";
-import { InputTextModule } from "primeng/inputtext";
-import { ToastModule } from "primeng/toast";
+import {
+  AbstractControl,
+  FormArray,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { TrioPlayer } from 'app/@shared/interface/trioPlayer';
+import { PlayersService } from 'app/@shared/services/players.service';
+import { TrioService } from 'app/@shared/services/trio.service';
+import { ConfirmationService, Message, MessageService } from 'primeng/api';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+import { ToastModule } from 'primeng/toast';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { MessagesModule } from 'primeng/messages';
-import { TrioGameHelper } from "./trio-game.helper";
+import { TrioGameHelper } from './trio-game.helper';
 
 @Component({
   selector: 'app-trio-game',
   standalone: true,
-  imports: [FormsModule, InputTextModule, ButtonModule, ReactiveFormsModule, MessagesModule, InputSwitchModule, ConfirmDialogModule, ToastModule, AutoCompleteModule, DropdownModule],
+  imports: [
+    FormsModule,
+    InputTextModule,
+    ButtonModule,
+    ReactiveFormsModule,
+    MessagesModule,
+    InputSwitchModule,
+    ConfirmDialogModule,
+    ToastModule,
+    AutoCompleteModule,
+    DropdownModule,
+  ],
   providers: [ConfirmationService, MessageService],
   templateUrl: './trio-game.component.html',
   styleUrl: './trio-game.component.css',
@@ -31,13 +48,18 @@ export class TrioGameComponent implements OnInit {
     private trioService: TrioService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    private playersService: PlayersService) {
-  }
+    private playersService: PlayersService,
+  ) {}
 
   async ngOnInit(): Promise<void> {
-    this.messages = [{ severity: 'info', detail: 'Il faut toujours enregistré les deux parties en mode Duo :)' }];
+    this.messages = [
+      {
+        severity: 'info',
+        detail: 'Il faut toujours enregistré les deux parties en mode Duo :)',
+      },
+    ];
     this.formHelper = new TrioGameHelper();
-    this.playerList = await this.playersService.getPlayerList()
+    this.playerList = await this.playersService.getPlayerList();
   }
 
   get players(): FormArray {
@@ -53,67 +75,77 @@ export class TrioGameComponent implements OnInit {
   }
 
   get disablePlayerRemoving(): boolean {
-    return this.players.controls.length === 3 || !this.players.value.find((player: TrioPlayer) => !player.name);
+    return (
+      this.players.controls.length === 3 ||
+      !this.players.value.find((player: TrioPlayer) => !player.name)
+    );
   }
 
   get isFormDisabled(): boolean {
-    return this.form.invalid || !this.players.value.find((player: TrioPlayer) => player.win)
+    return (
+      this.form.invalid ||
+      !this.players.value.find((player: TrioPlayer) => player.win)
+    );
   }
 
   toggleWin(index: number): void {
-    this.players.controls.forEach((player: AbstractControl<any>, i: number): void => {
-      const winControl = player.get('win');
+    this.players.controls.forEach(
+      (player: AbstractControl<any>, i: number): void => {
+        const winControl = player.get('win');
 
-      if (winControl) {
-        if (i === index) {
-          winControl.setValue(!winControl.value);
-        } else {
-          winControl.setValue(false)
+        if (winControl) {
+          if (i === index) {
+            winControl.setValue(!winControl.value);
+          } else {
+            winControl.setValue(false);
+          }
         }
-      }
-    });
+      },
+    );
   }
 
   resetWinner(): void {
     this.players.controls.forEach((player: AbstractControl<any>): void => {
       player.get('win')?.setValue(false);
-    })
+    });
   }
 
   addPlayer(): void {
-    this.formHelper.addPlayer()
+    this.formHelper.addPlayer();
   }
 
   removePlayer(): void {
-    this.formHelper.removePlayer()
+    this.formHelper.removePlayer();
   }
 
   saveGame(event: Event): void {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
-      header: "Confirmer",
+      header: 'Confirmer',
       message: 'Voulez-vous enregistrer les scores ?',
       icon: 'none',
-      acceptIcon: "none",
-      rejectIcon: "none",
-      acceptLabel: "Enregistrer",
-      rejectLabel: "Annuler",
-      rejectButtonStyleClass: "p-button-text",
-      accept: async (): Promise<void> =>
-        await this.confirmSubmit(),
+      acceptIcon: 'none',
+      rejectIcon: 'none',
+      acceptLabel: 'Enregistrer',
+      rejectLabel: 'Annuler',
+      rejectButtonStyleClass: 'p-button-text',
+      accept: async (): Promise<void> => await this.confirmSubmit(),
       reject: (): void => {
         this.confirmationService.close();
-      }
-    })
+      },
+    });
   }
 
   private async confirmSubmit(): Promise<void> {
-    await this.trioService.saveGame(this.formHelper.formatForAPI()).then((): void => {
-      this.showMessage()
-      this.resetWinner()
-    }).catch((): void => {
-      this.showError()
-    })
+    await this.trioService
+      .saveGame(this.formHelper.formatForAPI())
+      .then((): void => {
+        this.showMessage();
+        this.resetWinner();
+      })
+      .catch((): void => {
+        this.showError();
+      });
   }
 
   private async showMessage(): Promise<void> {
@@ -122,7 +154,7 @@ export class TrioGameComponent implements OnInit {
       summary: 'Succès',
       detail: 'Résultats enregistrés',
       key: 'br',
-      life: 3000
+      life: 3000,
     });
   }
 
@@ -132,7 +164,7 @@ export class TrioGameComponent implements OnInit {
       summary: 'Erreur',
       detail: 'Un problème est survenu',
       key: 'br',
-      life: 3000
+      life: 3000,
     });
   }
 }

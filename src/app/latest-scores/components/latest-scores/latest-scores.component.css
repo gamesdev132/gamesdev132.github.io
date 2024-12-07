@@ -26,7 +26,7 @@
   justify-content: space-between;
 }
 
-::ng-deep .p-card .p-card-content{
+::ng-deep .p-card .p-card-content {
   padding: 0 !important;
 }
 
@@ -44,7 +44,7 @@
   .point-games {
     flex-direction: column;
   }
-  
+
   .point-games__item {
     width: 100% !important;
   }

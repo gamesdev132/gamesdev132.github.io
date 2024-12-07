@@ -1,3 +1,3 @@
-import { Order } from "../enums/order.enum";
+import { Order } from '../enums/order.enum';
 
-export type OrderType = Order.Asc | Order.Desc
+export type OrderType = Order.Asc | Order.Desc;

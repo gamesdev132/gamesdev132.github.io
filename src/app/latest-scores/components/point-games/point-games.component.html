@@ -1,30 +1,44 @@
-<p-carousel [value]="scores" [showIndicators]="false" [responsiveOptions]="responsiveOptions">
+<p-carousel
+  [value]="scores"
+  [showIndicators]="false"
+  [responsiveOptions]="responsiveOptions"
+>
   <ng-template let-score pTemplate="item">
     <div class="card">
       <div class="scores__title">
         <div class="scores__icon">
-          <fa-icon [icon]="faMedal" [style.color]="getColor(score.players[0])"
-                   [style]="{'font-size': '1.4rem'}"></fa-icon>
+          <fa-icon
+            [icon]="faMedal"
+            [style.color]="getColor(score.players[0])"
+            [style]="{ 'font-size': '1.4rem' }"
+          ></fa-icon>
           <h4>{{ score.players[0].name }} {{ score.players[0].total }}</h4>
         </div>
         <div class="scores__icon">
-          <fa-icon [icon]="faDate" [style]="{'font-size': '1.2rem'}"></fa-icon>
+          <fa-icon
+            [icon]="faDate"
+            [style]="{ 'font-size': '1.2rem' }"
+          ></fa-icon>
           <h5>{{ score.date.toDate().toLocaleDateString() }}</h5>
         </div>
       </div>
       <div class="points-games__list">
-      @for (player of score.players; let i = $index; track player) {
-        @if (i > 0){
-        <div class="scores__icon points-games__height">
-          @if (player.isWinner || player.isSecond || player.isThird) {
-            <fa-icon [icon]="faMedal" [style.color]="getColor(player)" [style]="{'font-size': '1.4rem'}"></fa-icon>
-            <span>{{ player.name }} {{ player.total }}</span>
-          } @else {
-            <span>🤐 {{ player.name }} {{ player.total }}</span>
+        @for (player of score.players; let i = $index; track player) {
+          @if (i > 0) {
+            <div class="scores__icon points-games__height">
+              @if (player.isWinner || player.isSecond || player.isThird) {
+                <fa-icon
+                  [icon]="faMedal"
+                  [style.color]="getColor(player)"
+                  [style]="{ 'font-size': '1.4rem' }"
+                ></fa-icon>
+                <span>{{ player.name }} {{ player.total }}</span>
+              } @else {
+                <span>🤐 {{ player.name }} {{ player.total }}</span>
+              }
+            </div>
           }
-        </div>
         }
-      }
       </div>
     </div>
   </ng-template>

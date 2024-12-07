@@ -1,36 +1,66 @@
-<p-confirmDialog/>
-<p-toast [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }" position="bottom-right" key="br"/>
+<p-confirmDialog />
+<p-toast
+  [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }"
+  position="bottom-right"
+  key="br"
+/>
 <form [formGroup]="form" (ngSubmit)="saveGame($event)">
   <div formArrayName="players" class="players">
     @for (player of players.controls; let i = $index; track player) {
       <div class="player" [formGroupName]="i">
-        <p-dropdown formControlName="name" placeholder="Nom du joueur" [options]="playerList"
-                    [editable]="true"/>
-        <p-button [icon]="player.get('win')?.value ? 'pi pi-thumbs-up-fill' : 'pi pi-thumbs-down-fill'"
-                  (click)="toggleWin(i)" outlined></p-button>
+        <p-dropdown
+          formControlName="name"
+          placeholder="Nom du joueur"
+          [options]="playerList"
+          [editable]="true"
+        />
+        <p-button
+          [icon]="
+            player.get('win')?.value
+              ? 'pi pi-thumbs-up-fill'
+              : 'pi pi-thumbs-down-fill'
+          "
+          (click)="toggleWin(i)"
+          outlined
+        ></p-button>
       </div>
     }
     <div class="players-actions">
-      <p-button icon="pi pi-user-minus" outlined (click)="removePlayer()"
-                [disabled]="disablePlayerRemoving" title="Supprimer un joueur"/>
-      <p-button icon="pi pi-user-plus" outlined (click)="addPlayer()"
-                [disabled]="disablePlayerAdding" title="Ajouter un joueur"/>
+      <p-button
+        icon="pi pi-user-minus"
+        outlined
+        (click)="removePlayer()"
+        [disabled]="disablePlayerRemoving"
+        title="Supprimer un joueur"
+      />
+      <p-button
+        icon="pi pi-user-plus"
+        outlined
+        (click)="addPlayer()"
+        [disabled]="disablePlayerAdding"
+        title="Ajouter un joueur"
+      />
     </div>
   </div>
-  @if (formHelper.isDuo()){
+  @if (formHelper.isDuo()) {
     <div class="message">
-      <p-messages 
+      <p-messages
         [(value)]="messages"
-        [enableService]="false" 
+        [enableService]="false"
         [closable]="false"
-        ></p-messages>
+      ></p-messages>
     </div>
   }
   <div class="buttons">
-    <div class="duo-switch">    
+    <div class="duo-switch">
       <label for="duoSwith" class="duo-switch__label">Duo</label>
-      <p-inputSwitch formControlName="isDuo" inputId="duoSwith"/>
+      <p-inputSwitch formControlName="isDuo" inputId="duoSwith" />
     </div>
-    <p-button icon="pi pi-save" type="submit" label="Enregistrer" [disabled]="isFormDisabled"/>
+    <p-button
+      icon="pi pi-save"
+      type="submit"
+      label="Enregistrer"
+      [disabled]="isFormDisabled"
+    />
   </div>
 </form>

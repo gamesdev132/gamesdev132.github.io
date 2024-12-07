@@ -7,9 +7,8 @@ describe('TrioGameComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TrioGameComponent]
-    })
-    .compileComponents();
+      imports: [TrioGameComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TrioGameComponent);
     component = fixture.componentInstance;

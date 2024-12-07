@@ -8,7 +8,7 @@
     flex-wrap: wrap;
     justify-content: center;
   }
-  
+
   ::ng-deep .p-card-content {
     padding: 0;
   }

@@ -1,7 +1,17 @@
 <div class="new-player">
   <h3 class="header">Ajouter un joueur</h3>
   <form [formGroup]="form" class="form">
-    <input type="text" pInputText formControlName="name" placeholder="Nom du joueur"/>
-    <p-button (onClick)="onSave()" label="Enregistrer" class="button" [disabled]="isFormDisabled"></p-button>
+    <input
+      type="text"
+      pInputText
+      formControlName="name"
+      placeholder="Nom du joueur"
+    />
+    <p-button
+      (onClick)="onSave()"
+      label="Enregistrer"
+      class="button"
+      [disabled]="isFormDisabled"
+    ></p-button>
   </form>
 </div>

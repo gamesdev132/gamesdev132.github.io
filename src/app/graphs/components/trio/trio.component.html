@@ -1,9 +1,17 @@
 <div class="trio-stats">
   <h2>Trio</h2>
-  <p-dropdown [options]="chartTypes" [(ngModel)]="selectedChartType" (onChange)="setChar()"
-              [style]="{width: '280px'}"
+  <p-dropdown
+    [options]="chartTypes"
+    [(ngModel)]="selectedChartType"
+    (onChange)="setChar()"
+    [style]="{ width: '280px' }"
   ></p-dropdown>
 </div>
 <div class="chart">
-  <p-chart [type]="charTypeName" [data]="data" [options]="options" height="480px"/>
+  <p-chart
+    [type]="charTypeName"
+    [data]="data"
+    [options]="options"
+    height="480px"
+  />
 </div>

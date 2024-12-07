@@ -1,18 +1,25 @@
 <header>
   <div class="links justify-center">
     @for (item of items; track item.label) {
-      <a [routerLink]="item.routerLink" class="menu-link" routerLinkActive="active-link"
-         [routerLinkActiveOptions]="{ exact: true }">
+      <a
+        [routerLink]="item.routerLink"
+        class="menu-link"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
         <span class="ml-2">{{ item.label }}</span>
       </a>
     }
   </div>
 </header>
 <main>
-  <router-outlet/>
+  <router-outlet />
   @if (showAddButton) {
-    <a [routerLink]="'/scores/new'" class="pi pi-plus p-button p-button-icon add-button"
-       title="Enregistrer des scores">
+    <a
+      [routerLink]="'/scores/new'"
+      class="pi pi-plus p-button p-button-icon add-button"
+      title="Enregistrer des scores"
+    >
     </a>
   }
 </main>

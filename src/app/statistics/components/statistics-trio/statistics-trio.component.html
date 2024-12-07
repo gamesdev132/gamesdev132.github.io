@@ -1,15 +1,20 @@
-<p-card header="Trio" subheader="Meilleur ratio (parties gagnées/jouéees)" [style]="{margin: '1rem'}">
-    <div class="statistics__scores">
-      <app-podium [podiumData]="trioRatioData"></app-podium>
-      <div class="statistics__ratios">
-        <div class="statistics__ratio-list">
-          @for (ratio of trioRatioData; let i = $index; track ratio.name) {
-            @if(i > 2){
-              <p class="margin-0">
-                {{ (i+1) + '/ ' + ratio.name + ' : ' + ratio.ratio }}
-              </p>
-            }
+<p-card
+  header="Trio"
+  subheader="Meilleur ratio (parties gagnées/jouéees)"
+  [style]="{ margin: '1rem' }"
+>
+  <div class="statistics__scores">
+    <app-podium [podiumData]="trioRatioData"></app-podium>
+    <div class="statistics__ratios">
+      <div class="statistics__ratio-list">
+        @for (ratio of trioRatioData; let i = $index; track ratio.name) {
+          @if (i > 2) {
+            <p class="margin-0">
+              {{ i + 1 + '/ ' + ratio.name + ' : ' + ratio.ratio }}
+            </p>
           }
-        </div></div>
+        }
+      </div>
     </div>
-  </p-card>
+  </div>
+</p-card>

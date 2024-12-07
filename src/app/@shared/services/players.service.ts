@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Firestore, orderBy } from "@angular/fire/firestore";
-import { addDoc, collection, getDocs, query } from "firebase/firestore";
+import { Firestore, orderBy } from '@angular/fire/firestore';
+import { addDoc, collection, getDocs, query } from 'firebase/firestore';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PlayersService {
   private readonly playersCollection;
@@ -14,25 +14,23 @@ export class PlayersService {
   }
 
   async savePlayer(playerName: string): Promise<void> {
-    await addDoc(this.playersCollection, {name: playerName});
+    await addDoc(this.playersCollection, { name: playerName });
     this.playerList.push(playerName);
   }
 
   async initializePlayerList(): Promise<void> {
-    const querySnapshot = await getDocs(query(
-      this.playersCollection,
-      orderBy('name')
-    ))
-    querySnapshot.docs.map(
-      doc => (
-        doc.data()
-      )).map((player) => {
-      this.playerList.push(player['name'])
-    })
+    const querySnapshot = await getDocs(
+      query(this.playersCollection, orderBy('name')),
+    );
+    querySnapshot.docs
+      .map((doc) => doc.data())
+      .map((player) => {
+        this.playerList.push(player['name']);
+      });
   }
 
   async getPlayerList(): Promise<string[]> {
-    if (this.playerList.length === 0){
+    if (this.playerList.length === 0) {
       await this.initializePlayerList();
     }
     return this.playerList;

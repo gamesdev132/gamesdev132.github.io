@@ -1,4 +1,4 @@
 export interface RatioData {
-    name: string;
-    ratio: string;
+  name: string;
+  ratio: string;
 }

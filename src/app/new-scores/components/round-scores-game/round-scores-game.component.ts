@@ -1,20 +1,26 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
-import { Router } from "@angular/router";
-import { GamePointsParams } from "app/@shared/interface/game-points-params";
-import { GamePointsScores } from "app/@shared/interface/game-points-scores";
-import { HiloParams, SixQuiPrendParams } from "app/@shared/params/game-points-parms";
-import { GamePointsService } from "app/@shared/services/game-points.service";
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { GamePointsParams } from 'app/@shared/interface/game-points-params';
+import {
+  HiloParams,
+  SixQuiPrendParams,
+} from 'app/@shared/params/game-points-parms';
+import { GamePointsService } from 'app/@shared/services/game-points.service';
 import { LocalStorageService } from 'app/@shared/services/local-storage.service';
-import { PlayersService } from "app/@shared/services/players.service";
-import { RoundScoresGameHelper } from "app/new-scores/components/round-scores-game/round-scores-game.helper";
-import { ConfirmationService, MessageService } from "primeng/api";
-import { Button } from "primeng/button";
-import { ConfirmDialogModule } from "primeng/confirmdialog";
-import { DropdownModule } from "primeng/dropdown";
-import { InputNumberModule } from "primeng/inputnumber";
-import { TableModule } from "primeng/table";
-import { ToastModule } from "primeng/toast";
+import { PlayersService } from 'app/@shared/services/players.service';
+import { RoundScoresGameHelper } from 'app/new-scores/components/round-scores-game/round-scores-game.helper';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { Button } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { TableModule } from 'primeng/table';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-round-scores-game',
@@ -26,15 +32,15 @@ import { ToastModule } from "primeng/toast";
     InputNumberModule,
     Button,
     ConfirmDialogModule,
-    ToastModule
+    ToastModule,
   ],
   providers: [MessageService, ConfirmationService],
   templateUrl: './round-scores-game.component.html',
-  styleUrl: './round-scores-game.component.css'
+  styleUrl: './round-scores-game.component.css',
 })
 export class RoundScoresGameComponent implements OnInit {
-  @Input() gameName : 'SixQuiPrend' | 'Hilo' = 'SixQuiPrend';
-  gamePointsParams : GamePointsParams = SixQuiPrendParams;
+  @Input() gameName: 'SixQuiPrend' | 'Hilo' = 'SixQuiPrend';
+  gamePointsParams: GamePointsParams = SixQuiPrendParams;
   formHelper!: RoundScoresGameHelper;
   playerList: string[] = [];
 
@@ -43,8 +49,8 @@ export class RoundScoresGameComponent implements OnInit {
     private gamePointsService: GamePointsService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private localStorageService: LocalStorageService) {
-  }
+    private localStorageService: LocalStorageService,
+  ) {}
 
   async ngOnInit(): Promise<void> {
     this.formHelper = new RoundScoresGameHelper(SixQuiPrendParams);
@@ -52,11 +58,11 @@ export class RoundScoresGameComponent implements OnInit {
     if (this.gameName === 'Hilo') {
       this.gamePointsParams = HiloParams;
     }
-    this.formHelper.fillForm(this.localStorageService.getGamePoints())
+    this.formHelper.fillForm(this.localStorageService.getGamePoints());
   }
 
   get isFormDisabled(): boolean {
-    return this.form.invalid
+    return this.form.invalid;
   }
 
   get players(): FormArray {
@@ -68,21 +74,29 @@ export class RoundScoresGameComponent implements OnInit {
   }
 
   get disablePlayerAdding(): boolean {
-    return this.players.controls.length === this.gamePointsParams.maximumPlayers
+    return (
+      this.players.controls.length === this.gamePointsParams.maximumPlayers
+    );
   }
 
   get disablePlayerRemoving(): boolean {
-    return this.players.controls.length === this.gamePointsParams.minimumPlayers
+    return (
+      this.players.controls.length === this.gamePointsParams.minimumPlayers
+    );
   }
 
   updatePlayerTotal(index: number): void {
-    const points = this.players.at(index).get(this.formHelper.PLAYERS_POINTS_KEY) as FormArray
+    const points = this.players
+      .at(index)
+      .get(this.formHelper.PLAYERS_POINTS_KEY) as FormArray;
     let total = 0;
     points.controls.forEach((val) => {
       total += val.value;
-    })
-    this.players.at(index).get('total')?.setValue(total)
-    this.localStorageService.setGamePoints(this.formHelper.formatForLocalSave())
+    });
+    this.players.at(index).get('total')?.setValue(total);
+    this.localStorageService.setGamePoints(
+      this.formHelper.formatForLocalSave(),
+    );
   }
 
   get numberOfRounds(): number {
@@ -90,48 +104,54 @@ export class RoundScoresGameComponent implements OnInit {
   }
 
   getPoints(playerIndex: number) {
-    return (this.players.at(playerIndex).get(this.formHelper.PLAYERS_POINTS_KEY) as FormArray).controls as FormControl[];
+    return (
+      this.players
+        .at(playerIndex)
+        .get(this.formHelper.PLAYERS_POINTS_KEY) as FormArray
+    ).controls as FormControl[];
   }
 
   addPlayer(): void {
-    this.formHelper.addPlayer()
+    this.formHelper.addPlayer();
   }
 
   removePlayer(): void {
-    this.formHelper.removePlayer()
+    this.formHelper.removePlayer();
   }
 
   addRound(): void {
-    this.formHelper.addRound()
+    this.formHelper.addRound();
   }
 
   async submit(event: Event): Promise<void> {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
-      header: "Confirmer",
+      header: 'Confirmer',
       message: 'Voulez-vous enregistrer les scores ?',
       icon: 'none',
-      acceptIcon: "none",
-      rejectIcon: "none",
-      acceptLabel: "Enregistrer",
-      rejectLabel: "Annuler",
-      rejectButtonStyleClass: "p-button-text",
-      accept: async (): Promise<void> =>
-        await this.confirmSubmit(),
+      acceptIcon: 'none',
+      rejectIcon: 'none',
+      acceptLabel: 'Enregistrer',
+      rejectLabel: 'Annuler',
+      rejectButtonStyleClass: 'p-button-text',
+      accept: async (): Promise<void> => await this.confirmSubmit(),
       reject: (): void => {
         this.confirmationService.close();
-      }
-    })
+      },
+    });
   }
 
   private async confirmSubmit(): Promise<void> {
-    await this.gamePointsService.saveGame(this.formHelper.formatForAPI(), this.gameName).then((): void => {
-      this.showMessage()
-      this.localStorageService.emptyGamePoints()
-      this.form.reset()
-    }).catch((): void => {
-      this.showError()
-    })
+    await this.gamePointsService
+      .saveGame(this.formHelper.formatForAPI(), this.gameName)
+      .then((): void => {
+        this.showMessage();
+        this.localStorageService.emptyGamePoints();
+        this.form.reset();
+      })
+      .catch((): void => {
+        this.showError();
+      });
   }
 
   private async showMessage(): Promise<void> {
@@ -140,7 +160,7 @@ export class RoundScoresGameComponent implements OnInit {
       summary: 'Succès',
       detail: 'Résultats enregistrés',
       key: 'br',
-      life: 3000
+      life: 3000,
     });
   }
 
@@ -150,7 +170,7 @@ export class RoundScoresGameComponent implements OnInit {
       summary: 'Erreur',
       detail: 'Un problème est survenu',
       key: 'br',
-      life: 3000
+      life: 3000,
     });
   }
 }

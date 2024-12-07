@@ -1,7 +1,7 @@
-import { Timestamp } from "firebase/firestore";
+import { Timestamp } from 'firebase/firestore';
 
-export interface Trio{
-  date: Timestamp,
+export interface Trio {
+  date: Timestamp;
   players: string[];
   winner: string;
   isDuo?: boolean;

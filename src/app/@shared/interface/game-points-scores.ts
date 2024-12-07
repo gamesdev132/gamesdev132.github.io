@@ -1,7 +1,7 @@
-import { Timestamp } from "firebase/firestore";
+import { Timestamp } from 'firebase/firestore';
 
 export interface GamePointsScores {
-  date: Timestamp,
+  date: Timestamp;
   players: GamePointsPlayer[];
 }
 

@@ -1,28 +1,38 @@
 <p-carousel
   [value]="scores"
   [showIndicators]="false"
-  [numVisible]="3" 
+  [numVisible]="3"
   [numScroll]="1"
-  [responsiveOptions]="responsiveOptions">
+  [responsiveOptions]="responsiveOptions"
 >
+  >
   <ng-template let-game pTemplate="item">
     <div class="card">
       <div class="scores__title">
         <div class="scores__icon">
-          <fa-icon [icon]="faCrown" [style]="{color: '#FFD43B', 'font-size': '1.8rem'}"></fa-icon>
+          <fa-icon
+            [icon]="faCrown"
+            [style]="{ color: '#FFD43B', 'font-size': '1.8rem' }"
+          ></fa-icon>
           <h4>{{ game.winner }}</h4>
         </div>
         <div class="scores__icon">
-          <fa-icon [icon]="faDate" [style]="{'font-size': '1.2rem'}"></fa-icon>
+          <fa-icon
+            [icon]="faDate"
+            [style]="{ 'font-size': '1.2rem' }"
+          ></fa-icon>
           <h5>{{ game.date.toDate().toLocaleDateString() }}</h5>
         </div>
       </div>
       <div class="scores__list">
         <div class="scores__icon">
-          <fa-icon [icon]="faGroup" [style]="{'font-size': '1.4rem'}"></fa-icon>
+          <fa-icon
+            [icon]="faGroup"
+            [style]="{ 'font-size': '1.4rem' }"
+          ></fa-icon>
           <p class="line-height">{{ getPlayerList(game.players) }}</p>
         </div>
-        @if(game.isDuo){
+        @if (game.isDuo) {
           <p-tag value="Duo" />
         }
       </div>

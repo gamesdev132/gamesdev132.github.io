@@ -1,5 +1,5 @@
 export enum GameEnum {
-  Trio= 'Trio',
+  Trio = 'Trio',
   SixQuiPrend = 'SixQuiPrend',
-  Hilo = 'Hilo'
+  Hilo = 'Hilo',
 }
