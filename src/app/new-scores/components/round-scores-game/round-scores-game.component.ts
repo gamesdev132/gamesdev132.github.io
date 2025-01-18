@@ -56,7 +56,7 @@ export class RoundScoresGameComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.formHelper = new RoundScoresGameHelper(SixQuiPrendParams);
-    this.playerList = await this.playersService.getPlayerList();
+    this.playerList = await this.playersService.getActivePlayerList();
     if (this.gameName === GameEnum.Hilo) {
       this.gamePointsParams = HiloParams;
     }
