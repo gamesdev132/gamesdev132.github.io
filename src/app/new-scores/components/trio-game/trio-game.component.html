@@ -11,8 +11,10 @@
         <p-dropdown
           formControlName="name"
           placeholder="Nom du joueur"
+          filter
+          showClear
           [options]="playerList"
-          [editable]="true"
+          [style]="{width: '220px'}"
         />
         <p-button
           [icon]="

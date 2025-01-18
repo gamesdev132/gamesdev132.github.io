@@ -21,6 +21,7 @@ export class PlayersService {
   }
 
   async initializePlayerList(): Promise<void> {
+    this.playerList = [];
     const querySnapshot = await getDocs(
       query(this.playersCollection, orderBy('name')),
     );
@@ -42,6 +43,10 @@ export class PlayersService {
     if (this.playerList.length === 0) {
       await this.initializePlayerList();
     }
-    return this.playerList.filter((player) => player.deactivate !== true).map((player) => player.name);
+    return this.playerList.filter((player) => player.deactivate !== true).map((player) => this.normalizeString(player.name));
+  }
+
+  private normalizeString(input: string): string {
+    return input.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   }
 }

@@ -28,10 +28,11 @@
           <p-dropdown
             formControlName="name"
             placeholder="Nom du joueur"
-            [options]="playerList"
-            [editable]="true"
+            showClear
+            filter
             appendTo="body"
-            [style]="{ width: '190px' }"
+            [options]="playerList"
+            [style]="{ width: '180px' }"
           />
         </td>
 

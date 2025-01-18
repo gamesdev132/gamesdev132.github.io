@@ -59,7 +59,7 @@ export class TrioGameComponent implements OnInit {
       },
     ];
     this.formHelper = new TrioGameHelper();
-    this.playerList = await this.playersService.getPlayerList();
+    this.playerList = await this.playersService.getActivePlayerList();
   }
 
   get players(): FormArray {
