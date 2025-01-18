@@ -50,7 +50,10 @@ export class RoundScoresGameHelper {
     this.form = new FormGroup<any>({
       players: new FormArray(
         [],
-        [Validators.minLength(3), Validators.maxLength(7)],
+        [
+          Validators.minLength(this.gameParameters.minimumPlayers),
+          Validators.maxLength(this.gameParameters.maximumPlayers),
+        ],
       ),
     });
 
