@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Firestore, orderBy } from '@angular/fire/firestore';
 import { addDoc, collection, getDocs, query } from 'firebase/firestore';
 import { Player } from 'app/@shared/interface/player';
+import { BehaviorSubject, of, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,7 @@ import { Player } from 'app/@shared/interface/player';
 export class PlayersService {
   private readonly playersCollection;
   private playerList: Player[] = [];
+  activePlayers: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
   constructor(private firestore: Firestore) {
     this.playersCollection = collection(this.firestore, 'players');
@@ -18,6 +20,7 @@ export class PlayersService {
     const player = { name: playerName };
     await addDoc(this.playersCollection, player);
     this.playerList.push(player);
+    this.activePlayers.next(this.getActivePlayers());
   }
 
   async initializePlayerList(): Promise<void> {
@@ -29,6 +32,7 @@ export class PlayersService {
       .map((doc) => doc.data())
       .map((player) => {
         this.playerList.push({ name: player['name'], deactivate: player['deactivate'] ?? false });
+        this.activePlayers.next(this.getActivePlayers());
       });
   }
 
@@ -39,14 +43,11 @@ export class PlayersService {
     return this.playerList.map((player) => player.name);
   }
 
-  async getActivePlayerList(): Promise<string[]> {
-    if (this.playerList.length === 0) {
-      await this.initializePlayerList();
-    }
-    return this.playerList.filter((player) => player.deactivate !== true).map((player) => this.normalizeString(player.name));
-  }
-
   private normalizeString(input: string): string {
     return input.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  }
+
+  private getActivePlayers(): string[] {
+    return this.playerList.filter((player) => player.deactivate !== true).map((player) => this.normalizeString(player.name));
   }
 }
