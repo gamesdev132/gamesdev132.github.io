@@ -43,11 +43,7 @@ export class PlayersService {
     return this.playerList.map((player) => player.name);
   }
 
-  private normalizeString(input: string): string {
-    return input.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-  }
-
   private getActivePlayers(): string[] {
-    return this.playerList.filter((player) => player.deactivate !== true).map((player) => this.normalizeString(player.name));
+    return this.playerList.filter((player) => player.deactivate !== true).map((player) => player.name);
   }
 }
