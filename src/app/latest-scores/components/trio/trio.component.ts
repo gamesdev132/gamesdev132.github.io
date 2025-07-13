@@ -15,7 +15,7 @@ import { TagModule } from 'primeng/tag';
   standalone: true,
   imports: [CarouselModule, CardModule, FontAwesomeModule, TagModule],
   templateUrl: './trio.component.html',
-  styleUrl: './trio.component.css',
+  styleUrl: './trio.component.scss',
 })
 export class TrioComponent implements OnInit {
   @Input({ required: true }) scores: Trio[] = [];

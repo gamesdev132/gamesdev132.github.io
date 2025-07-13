@@ -37,7 +37,7 @@ import { TrioGameHelper } from '../../helpers/trio-game.helper';
   ],
   providers: [ConfirmationService, MessageService],
   templateUrl: './trio-game.component.html',
-  styleUrl: './trio-game.component.css',
+  styleUrl: './trio-game.component.scss',
 })
 export class TrioGameComponent implements OnInit {
   formHelper!: TrioGameHelper;

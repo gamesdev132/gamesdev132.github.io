@@ -24,7 +24,7 @@ import { SkeletonModule } from 'primeng/skeleton';
     SkeletonModule,
   ],
   templateUrl: './statistics.component.html',
-  styleUrl: './statistics.component.css',
+  styleUrl: './statistics.component.scss',
 })
 export class StatisticsComponent implements OnInit {
   trioRatios: TrioRatio[] = [];

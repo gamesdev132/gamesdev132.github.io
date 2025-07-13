@@ -19,7 +19,7 @@ import { CarouselModule } from 'primeng/carousel';
     EmptyStateComponent,
   ],
   templateUrl: './latest-scores.component.html',
-  styleUrl: './latest-scores.component.css',
+  styleUrl: './latest-scores.component.scss',
 })
 export class LatestScoresComponent implements OnInit {
   trioScores: Trio[] = [];

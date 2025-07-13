@@ -37,7 +37,7 @@ import { ToastModule } from 'primeng/toast';
   ],
   providers: [MessageService, ConfirmationService],
   templateUrl: './round-scores-game.component.html',
-  styleUrl: './round-scores-game.component.css',
+  styleUrl: './round-scores-game.component.scss',
 })
 export class RoundScoresGameComponent implements OnInit {
   @Input() gameName: GameEnum.SixQuiPrend | GameEnum.Hilo =

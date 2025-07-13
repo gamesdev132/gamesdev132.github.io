@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faCalendarDays,
-  faCrown,
   faMedal,
 } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -16,7 +15,7 @@ import { CarouselModule } from 'primeng/carousel';
   standalone: true,
   imports: [CarouselModule, FontAwesomeModule],
   templateUrl: './point-games.component.html',
-  styleUrl: './point-games.component.css',
+  styleUrl: './point-games.component.scss',
 })
 export class PointGamesComponent implements OnInit {
   @Input({ required: true }) scores!: GamePointsScores[];

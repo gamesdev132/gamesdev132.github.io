@@ -9,7 +9,7 @@ import { RatioData } from 'app/@shared/interface/ratio-data';
   standalone: true,
   imports: [CardModule, PodiumComponent],
   templateUrl: './statistics-trio.component.html',
-  styleUrl: './statistics-trio.component.css',
+  styleUrl: './statistics-trio.component.scss',
 })
 export class StatisticsTrioComponent implements OnChanges {
   @Input({ required: true }) trioRatios: TrioRatio[] = [];

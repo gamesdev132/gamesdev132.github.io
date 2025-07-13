@@ -16,7 +16,7 @@ import { TrioGameComponent } from '../trio-game/trio-game.component';
     RoundScoresGameComponent,
   ],
   templateUrl: './choose-game.component.html',
-  styleUrl: './choose-game.component.css',
+  styleUrl: './choose-game.component.scss',
 })
 export class ChooseGameComponent implements OnInit {
   gameList: GameEnum[] = [GameEnum.Hilo, GameEnum.SixQuiPrend, GameEnum.Trio];

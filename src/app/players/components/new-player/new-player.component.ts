@@ -14,7 +14,7 @@ import { InputTextModule } from 'primeng/inputtext';
   standalone: true,
   imports: [InputTextModule, ReactiveFormsModule, Button],
   templateUrl: './new-player.component.html',
-  styleUrl: './new-player.component.css',
+  styleUrl: './new-player.component.scss',
 })
 export class NewPlayerComponent {
   form!: FormGroup;

@@ -8,7 +8,7 @@ import { MegaMenuModule } from 'primeng/megamenu';
   standalone: true,
   imports: [RouterOutlet, MegaMenuModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
   items: MegaMenuItem[] | undefined;

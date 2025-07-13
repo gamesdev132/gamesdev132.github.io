@@ -16,7 +16,7 @@ export enum ChartType {
   standalone: true,
   imports: [ChartModule, DropdownModule, FormsModule],
   templateUrl: './trio.component.html',
-  styleUrl: './trio.component.css',
+  styleUrl: './trio.component.scss',
 })
 export class TrioComponent implements OnInit {
   data: any;

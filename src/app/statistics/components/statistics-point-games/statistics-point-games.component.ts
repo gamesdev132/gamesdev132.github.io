@@ -12,7 +12,7 @@ import { FilterKey } from '../../enums/filter-key.enum';
   standalone: true,
   imports: [PodiumComponent, CardModule],
   templateUrl: './statistics-point-games.component.html',
-  styleUrl: './statistics-point-games.component.css',
+  styleUrl: './statistics-point-games.component.scss',
 })
 export class StatisticsPointGamesComponent implements OnChanges {
   @Input({ required: true }) gamesListRatio!: RoundScoresRatio[];

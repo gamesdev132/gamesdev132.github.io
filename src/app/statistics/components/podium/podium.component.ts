@@ -6,7 +6,7 @@ import { RatioData } from 'app/@shared/interface/ratio-data';
   standalone: true,
   imports: [],
   templateUrl: './podium.component.html',
-  styleUrl: './podium.component.css',
+  styleUrl: './podium.component.scss',
 })
 export class PodiumComponent {
   @Input({ required: true }) podiumData!: RatioData[];
