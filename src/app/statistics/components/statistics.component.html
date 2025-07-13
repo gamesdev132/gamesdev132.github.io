@@ -1,16 +1,26 @@
 <div class="statistics">
-  <app-statistics-trio [trioRatios]="trioRatios"></app-statistics-trio>
 
-  @if (sixQuiPrendRatios.length) {
-    <app-statistics-point-games
-      [gamesListRatio]="sixQuiPrendRatios"
-      gameName="SixQuiPrend"
-    ></app-statistics-point-games>
-  }
-  @if (hiloRatios.length) {
-    <app-statistics-point-games
-      [gamesListRatio]="hiloRatios"
-      gameName="Hilo"
-    ></app-statistics-point-games>
+  @if (isLoading) {
+    <div class="statistics__skeletons">
+      <p-skeleton width="100%" height="100%" />
+    </div>
+  } @else {
+    @if (trioRatios.length) {
+      <app-statistics-trio [trioRatios]="trioRatios"></app-statistics-trio>
+    }
+
+    @if (sixQuiPrendRatios.length) {
+      <app-statistics-point-games
+        [gamesListRatio]="sixQuiPrendRatios"
+        gameName="SixQuiPrend"
+      ></app-statistics-point-games>
+    }
+
+    @if (hiloRatios.length) {
+      <app-statistics-point-games
+        [gamesListRatio]="hiloRatios"
+        gameName="Hilo"
+      ></app-statistics-point-games>
+    }
   }
 </div>

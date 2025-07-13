@@ -9,6 +9,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { StatisticsPointGamesComponent } from './statistics-point-games/statistics-point-games.component';
 import { StatisticsTrioComponent } from './statistics-trio/statistics-trio.component';
 import { GameEnum } from 'app/@shared/enums/game.enum';
+import { forkJoin } from 'rxjs';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
   selector: 'app-statistics',
@@ -19,6 +21,7 @@ import { GameEnum } from 'app/@shared/enums/game.enum';
     FormsModule,
     StatisticsPointGamesComponent,
     StatisticsTrioComponent,
+    SkeletonModule,
   ],
   templateUrl: './statistics.component.html',
   styleUrl: './statistics.component.css',
@@ -27,6 +30,7 @@ export class StatisticsComponent implements OnInit {
   trioRatios: TrioRatio[] = [];
   sixQuiPrendRatios: RoundScoresRatio[] = [];
   hiloRatios: RoundScoresRatio[] = [];
+  isLoading: boolean = false;
 
   constructor(
     private trioService: TrioService,
@@ -38,14 +42,17 @@ export class StatisticsComponent implements OnInit {
   }
 
   private async getRatios(): Promise<void> {
-    await this.trioService.getRatios().then((value) => {
-      this.trioRatios = value;
-    });
-    await this.gamePointsService.getRatios().then((value) => {
-      this.sixQuiPrendRatios = value;
-    });
-    await this.gamePointsService.getRatios(GameEnum.Hilo).then((value) => {
-      this.hiloRatios = value;
+    this.isLoading = true;
+
+    forkJoin({
+      trio: this.trioService.getRatios(),
+      sixQuiPrend: this.gamePointsService.getRatios(),
+      hilo: this.gamePointsService.getRatios(GameEnum.Hilo),
+    }).subscribe(({ trio, sixQuiPrend, hilo }) => {
+      this.trioRatios = trio;
+      this.sixQuiPrendRatios = sixQuiPrend;
+      this.hiloRatios = hilo;
+      this.isLoading = false;
     });
   }
 }
