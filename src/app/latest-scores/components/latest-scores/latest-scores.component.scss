@@ -1,13 +1,36 @@
-.text-center {
-  text-align: center;
+.latest-scores {
+  &__item {
+    margin: 1rem 0;
+  }
+
+  &__title {
+    text-align: center;
+  }
+
+  &__point-games {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+
+  &__point-games-item {
+    margin: 1rem 0;
+    width: 50%;
+  }
+
+  @media (max-width: 800px) {
+    &__point-games {
+      flex-direction: column;
+    }
+
+    &__point-games-item {
+      width: 100% !important;
+    }
+  }
 }
 
 .line-height {
   line-height: 1.4;
-}
-
-.latest-score__item {
-  margin: 1rem 0;
 }
 
 ::ng-deep .scores__icon {
@@ -28,24 +51,4 @@
 
 ::ng-deep .p-card .p-card-content {
   padding: 0 !important;
-}
-
-.point-games {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-}
-
-.point-games__item {
-  width: 50%;
-}
-
-@media (max-width: 800px) {
-  .point-games {
-    flex-direction: column;
-  }
-
-  .point-games__item {
-    width: 100% !important;
-  }
 }

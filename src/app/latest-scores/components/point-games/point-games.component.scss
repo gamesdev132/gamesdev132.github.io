@@ -1,19 +1,18 @@
-.winner {
-  font-weight: 700;
-}
+.points-games {
+  &__height {
+    height: 36px;
+  }
 
-.points-games__height {
-  height: 36px;
-}
+  &__list {
+    display: flex;
+    flex-direction: column;
+  }
 
-.points-games__list {
-  display: flex;
-  flex-direction: column;
-}
-
-@media (max-width: 500px) {
-  .points-games__list {
-    display: grid !important;
-    grid-template-columns: 50% 50% !important;
+  @media (max-width: 500px) {
+    &__list {
+      display: grid !important;
+      grid-template-columns: 50% 50% !important;
+    }
   }
 }
+

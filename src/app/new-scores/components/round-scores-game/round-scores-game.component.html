@@ -4,7 +4,7 @@
   position="bottom-right"
   key="br"
 />
-<form [formGroup]="form" class="round-scores__form">
+<form [formGroup]="form" class="round-scores">
   <p-table [value]="players.controls" [scrollable]="true">
     <ng-template pTemplate="header">
       <tr>
@@ -12,7 +12,7 @@
         <ng-container>
           @for (round of getPoints(0); let roundIndex = $index; track round) {
             <ng-container>
-              <th class="text-center" [style]="{ width: '72px' }">
+              <th class="round-scores__title" [style]="{ width: '72px' }">
                 Round {{ roundIndex + 1 }}
               </th>
             </ng-container>
@@ -59,7 +59,7 @@
     <ng-template pTemplate="footer">
       <tr>
         <td pFrozenColumn>
-          <div class="table-buttons">
+          <div class="round-scores__buttons">
             <p-button
               icon="pi pi-user-minus"
               outlined
@@ -83,7 +83,7 @@
             outlined
             (click)="addRound()"
             title="Ajouter un round"
-            class="table-buttons"
+            class="round-scores__buttons"
             [disabled]="isFormDisabled"
           ></p-button>
         </td>

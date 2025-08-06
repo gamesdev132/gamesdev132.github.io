@@ -1,16 +1,16 @@
 <!-- Trio -->
 <div class="latest-score__item">
-  <h2 class="text-center">Trio</h2>
+  <h2 class="latest-scores__title">Trio</h2>
   @if (trioScores.length) {
     <app-trio [scores]="trioScores"></app-trio>
   } @else {
     <app-empty-state></app-empty-state>
   }
 </div>
-<div class="point-games">
+<div class="latest-scores__point-games">
   <!-- 6 qui prend -->
-  <div class="point-games__item latest-score__item">
-    <h2 class="text-center">6 qui Prend</h2>
+  <div class="latest-scores__point-games-item">
+    <h2 class="latest-scores__title">6 qui Prend</h2>
     @if (sixQuiPrendScores.length) {
       <app-point-games [scores]="sixQuiPrendScores"></app-point-games>
     } @else {
@@ -18,8 +18,8 @@
     }
   </div>
   <!-- Hilo -->
-  <div class="point-games__item latest-score__item">
-    <h2 class="text-center">Hilo</h2>
+  <div class="latest-scores__point-games-item">
+    <h2 class="latest-scores__title">Hilo</h2>
     @if (hiloScores.length) {
       <app-point-games [scores]="hiloScores"></app-point-games>
     } @else {

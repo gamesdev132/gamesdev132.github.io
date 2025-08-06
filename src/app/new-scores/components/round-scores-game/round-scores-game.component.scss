@@ -1,13 +1,15 @@
 :host {
   .round-scores {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 4rem;
-  }
-
-  .round-scores__form {
     padding: 0.5rem;
+
+    &__title {
+      text-align: center;
+    }
+
+    &__buttons {
+      display: flex;
+      justify-content: space-around;
+    }
   }
 
   td {
@@ -16,14 +18,5 @@
 
   input {
     width: 40px;
-  }
-
-  .text-center {
-    text-align: center;
-  }
-
-  .table-buttons {
-    display: flex;
-    justify-content: space-around;
   }
 }

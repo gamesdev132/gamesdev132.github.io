@@ -5,16 +5,16 @@
     flex-wrap: wrap;
     align-items: center;
 
-    .header {
+    &__header {
       padding-bottom: 1rem !important;
     }
 
-    .form {
+    &__form {
       display: flex;
       flex-direction: column;
     }
 
-    .button {
+    &__button {
       display: flex;
       justify-content: end;
       padding-top: 1rem;
