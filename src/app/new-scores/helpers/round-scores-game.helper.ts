@@ -6,7 +6,6 @@ import {
   GamePointsScores,
 } from 'app/@shared/interface/game-points-scores';
 import { TrioPlayer } from 'app/@shared/interface/trioPlayer';
-import { Timestamp } from 'firebase/firestore';
 
 export class RoundScoresGameHelper {
   readonly PLAYERS_KEY = 'players';
@@ -100,7 +99,7 @@ export class RoundScoresGameHelper {
       );
     return {
       players: players,
-      date: Timestamp.now(),
+      date: new Date(),
     };
   }
 

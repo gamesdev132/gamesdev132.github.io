@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Firestore, orderBy } from '@angular/fire/firestore';
-import { addDoc, collection, getDocs, query } from 'firebase/firestore';
+import { Firestore, orderBy, addDoc, collection, getDocs, query } from '@angular/fire/firestore';
 import { Player } from 'app/@shared/interface/player';
-import { BehaviorSubject, of, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

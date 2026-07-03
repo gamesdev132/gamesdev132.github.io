@@ -1,15 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Firestore, orderBy, where } from '@angular/fire/firestore';
+import { Firestore, orderBy, where, addDoc, collection, getDocs, query } from '@angular/fire/firestore';
 import { TrioRatio } from 'app/@shared/interface/trioRatio';
 import { PlayersService } from 'app/@shared/services/players.service';
 import { getPastTimestampDate } from 'app/@shared/utils/date.utils';
-import {
-  addDoc,
-  collection,
-  getDocs,
-  query,
-  Timestamp,
-} from 'firebase/firestore';
 import { Trio } from '../interface/trio';
 
 @Injectable({
@@ -48,7 +41,7 @@ export class TrioService {
   }
 
   async getScoresFromLastXDays(days: number = 31): Promise<Trio[]> {
-    const startDate: Timestamp = getPastTimestampDate(days);
+    const startDate: Date = getPastTimestampDate(days);
     const querySnapshot = await getDocs(
       query(
         this.trioCollection,

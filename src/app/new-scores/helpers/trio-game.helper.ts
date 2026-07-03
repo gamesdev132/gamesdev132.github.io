@@ -1,7 +1,6 @@
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Trio } from 'app/@shared/interface/trio';
 import { TrioPlayer } from 'app/@shared/interface/trioPlayer';
-import { Timestamp } from 'firebase/firestore';
 
 export class TrioGameHelper {
   private form!: FormGroup;
@@ -58,7 +57,7 @@ export class TrioGameHelper {
     const trioGame = {
       players: players.map((player: TrioPlayer) => player.name),
       winner: players.find((player: TrioPlayer) => player.win)?.name ?? '',
-      date: Timestamp.now(),
+      date: new Date(),
     } as Trio;
 
     const isDuoValue = this.form.get('isDuo')?.value;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GameEnum } from 'app/@shared/enums/game.enum';
 import { PlayersService } from 'app/@shared/services/players.service';
@@ -10,6 +11,7 @@ import { TrioGameComponent } from '../trio-game/trio-game.component';
   selector: 'app-choose-game',
   standalone: true,
   imports: [
+    CommonModule,
     FormsModule,
     DropdownModule,
     TrioGameComponent,

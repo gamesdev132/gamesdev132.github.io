@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { GamePointsScores } from '../interface/game-points-scores';
 import { GamePointsFormPlayer } from '../interface/game-points-form';
 
 @Injectable({

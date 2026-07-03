@@ -7,13 +7,7 @@ import {
 import { RoundScoresRatio } from 'app/@shared/interface/roundScoresRatio';
 import { PlayersService } from 'app/@shared/services/players.service';
 import { getPastTimestampDate } from 'app/@shared/utils/date.utils';
-import {
-  addDoc,
-  collection,
-  getDocs,
-  query,
-  Timestamp,
-} from 'firebase/firestore';
+import { addDoc, collection, getDocs, query } from '@angular/fire/firestore';
 import { GameEnum } from '../enums/game.enum';
 
 @Injectable({
@@ -41,7 +35,7 @@ export class GamePointsService {
     days: number = 31,
   ): Promise<GamePointsScores[]> {
     const collection = this.getCollection(game);
-    const startDate: Timestamp = getPastTimestampDate(days);
+    const startDate: Date = getPastTimestampDate(days);
     const querySnapshot = await getDocs(
       query(
         collection,
