@@ -9,11 +9,12 @@ import {
   GamePointsScores,
 } from 'app/@shared/interface/game-points-scores';
 import { CarouselModule } from 'primeng/carousel';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-point-games',
   standalone: true,
-  imports: [CarouselModule, FontAwesomeModule],
+  imports: [CarouselModule, FontAwesomeModule, CardModule],
   templateUrl: './point-games.component.html',
   styleUrl: './point-games.component.scss',
 })

@@ -1,0 +1,14 @@
+<div class="title-card">
+  <div class="title-card__card"
+       [ngClass]="'title-card__card-' + color">
+    <fa-icon
+      class="title-card__icon"
+      [ngClass]="'title-card__icon-' + color"
+      [icon]="icon"
+    ></fa-icon>
+  </div>
+  <div>
+    <div class="title-card__title">{{ title }}</div>
+    <div class="title-card__subtitle">{{ itemsCount }} parties</div>
+  </div>
+</div>
