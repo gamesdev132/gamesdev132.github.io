@@ -1,16 +1,26 @@
-<!-- Trio -->
-<div class="latest-score__item">
-  <h2 class="latest-scores__title">Trio</h2>
-  @if (trioScores.length) {
-    <app-trio [scores]="trioScores"></app-trio>
-  } @else {
-    <app-empty-state></app-empty-state>
-  }
-</div>
-<div class="latest-scores__point-games">
+<div class="latest-scores">
+  <!-- Trio -->
+  <div class="latest-scores__item">
+    <app-title-card
+      title="Trio"
+      color="green"
+      [itemsCount]="trioScores.length"
+      [icon]="faCubes"
+    ></app-title-card>
+    @if (trioScores.length) {
+      <app-trio [scores]="trioScores"></app-trio>
+    } @else {
+      <app-empty-state></app-empty-state>
+    }
+  </div>
   <!-- 6 qui prend -->
-  <div class="latest-scores__point-games-item">
-    <h2 class="latest-scores__title">6 qui Prend</h2>
+  <div class="latest-scores__item">
+    <app-title-card
+      color="red"
+      title="6 qui Prend"
+      [itemsCount]="sixQuiPrendScores.length"
+      [icon]="fa6"
+    ></app-title-card>
     @if (sixQuiPrendScores.length) {
       <app-point-games [scores]="sixQuiPrendScores"></app-point-games>
     } @else {
@@ -18,8 +28,13 @@
     }
   </div>
   <!-- Hilo -->
-  <div class="latest-scores__point-games-item">
-    <h2 class="latest-scores__title">Hilo</h2>
+  <div class="latest-scores__item">
+    <app-title-card
+      color="blue"
+      title="Hilo"
+      [itemsCount]="hiloScores.length"
+      [icon]="faArrowUp19"
+    ></app-title-card>
     @if (hiloScores.length) {
       <app-point-games [scores]="hiloScores"></app-point-games>
     } @else {

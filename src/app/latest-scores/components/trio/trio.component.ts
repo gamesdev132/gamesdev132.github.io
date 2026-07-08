@@ -37,7 +37,7 @@ export class TrioComponent implements OnInit {
         numScroll: 1,
       },
       {
-        breakpoint: '750px',
+        breakpoint: '800px',
         numVisible: 1,
         numScroll: 1,
       },

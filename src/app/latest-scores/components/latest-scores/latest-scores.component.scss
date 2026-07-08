@@ -1,7 +1,20 @@
 .latest-scores {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-bottom: 128px;
+
   &__item {
-    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 32px;
+
+    @media (max-width: 800px) {
+      padding: 0;
+    }
   }
+
 
   &__title {
     text-align: center;
@@ -29,26 +42,44 @@
   }
 }
 
-.line-height {
-  line-height: 1.4;
-}
+::ng-deep {
+  .scores {
+    &__icon {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 52px;
+    }
 
-::ng-deep .scores__icon {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  height: 52px;
-}
+    &__title {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
 
-::ng-deep .p-carousel {
-  margin: 0 0.5rem;
-}
+  .p-carousel {
+    margin: 0 0.5rem;
+  }
 
-::ng-deep .scores__title {
-  display: flex;
-  justify-content: space-between;
-}
+  .p-card .p-card-content {
+    padding: 0 !important;
+  }
 
-::ng-deep .p-card .p-card-content {
-  padding: 0 !important;
+  .p-card-body {
+    padding: 8px 24px !important;
+  }
+
+  .p-carousel-items-container {
+    margin: 2px;
+  }
+
+  .p-carousel-item {
+    padding: 0 4px;
+  }
+
+  @media (min-width: 750px) {
+    .p-carousel-item {
+      padding: 0 8px;
+    }
+  }
 }

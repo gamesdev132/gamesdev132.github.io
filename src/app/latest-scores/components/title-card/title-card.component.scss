@@ -1,0 +1,53 @@
+.title-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+
+  &__card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 54px;
+    height: 54px;
+    border-radius: 12px;
+
+    &-red {
+      background-color: #FFEDEB;
+    }
+
+    &-blue {
+      background-color: #F2EFFF;
+    }
+
+    &-green {
+      background-color: #BEFFDB;
+    }
+  }
+
+  &__icon {
+    font-size: 1.2rem;
+
+    &-red {
+      color: #881D24;
+    }
+
+    &-blue {
+      color: #3323CC;
+    }
+
+    &-green {
+      color: #006C49;
+    }
+  }
+
+  &__title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding-bottom: 2px;
+  }
+
+  &__subtitle {
+    font-size: 0.875rem;
+  }
+}

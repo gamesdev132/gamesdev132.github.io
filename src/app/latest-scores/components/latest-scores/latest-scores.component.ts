@@ -8,6 +8,8 @@ import { EmptyStateComponent } from 'app/latest-scores/components/empty-state/em
 import { PointGamesComponent } from 'app/latest-scores/components/point-games/point-games.component';
 import { TrioComponent } from 'app/latest-scores/components/trio/trio.component';
 import { CarouselModule } from 'primeng/carousel';
+import { TitleCardComponent } from 'app/latest-scores/components/title-card/title-card.component';
+import { fa6, faArrowUp19, faCubes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-latest-scores',
@@ -17,6 +19,7 @@ import { CarouselModule } from 'primeng/carousel';
     PointGamesComponent,
     CarouselModule,
     EmptyStateComponent,
+    TitleCardComponent,
   ],
   templateUrl: './latest-scores.component.html',
   styleUrl: './latest-scores.component.scss',
@@ -25,6 +28,9 @@ export class LatestScoresComponent implements OnInit {
   trioScores: Trio[] = [];
   sixQuiPrendScores: GamePointsScores[] = [];
   hiloScores: GamePointsScores[] = [];
+  protected readonly fa6 = fa6;
+  protected readonly faCubes = faCubes;
+  protected readonly faArrowUp19 = faArrowUp19;
 
   constructor(
     private trioService: TrioService,
