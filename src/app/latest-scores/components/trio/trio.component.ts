@@ -12,7 +12,6 @@ import { TagModule } from 'primeng/tag';
 
 @Component({
   selector: 'app-trio',
-  standalone: true,
   imports: [CarouselModule, CardModule, FontAwesomeModule, TagModule],
   templateUrl: './trio.component.html',
   styleUrl: './trio.component.scss',

@@ -9,7 +9,6 @@ import { FilterKey } from '../../enums/filter-key.enum';
 
 @Component({
   selector: 'app-statistics-point-games',
-  standalone: true,
   imports: [PodiumComponent, CardModule],
   templateUrl: './statistics-point-games.component.html',
   styleUrl: './statistics-point-games.component.scss',

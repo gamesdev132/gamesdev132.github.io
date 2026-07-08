@@ -22,7 +22,6 @@ import { TrioGameHelper } from '../../helpers/trio-game.helper';
 
 @Component({
   selector: 'app-trio-game',
-  standalone: true,
   imports: [
     FormsModule,
     InputTextModule,

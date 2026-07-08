@@ -5,7 +5,6 @@ import { MegaMenuModule } from 'primeng/megamenu';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [RouterOutlet, MegaMenuModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

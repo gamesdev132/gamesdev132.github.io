@@ -11,7 +11,6 @@ import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-new-player',
-  standalone: true,
   imports: [InputTextModule, ReactiveFormsModule, Button],
   templateUrl: './new-player.component.html',
   styleUrl: './new-player.component.scss',

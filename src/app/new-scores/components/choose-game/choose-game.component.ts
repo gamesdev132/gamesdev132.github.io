@@ -9,7 +9,6 @@ import { TrioGameComponent } from '../trio-game/trio-game.component';
 
 @Component({
   selector: 'app-choose-game',
-  standalone: true,
   imports: [
     CommonModule,
     FormsModule,

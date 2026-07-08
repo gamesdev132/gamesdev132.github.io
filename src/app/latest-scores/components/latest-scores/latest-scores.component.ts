@@ -13,7 +13,6 @@ import { fa6, faArrowUp19, faCubes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-latest-scores',
-  standalone: true,
   imports: [
     TrioComponent,
     PointGamesComponent,

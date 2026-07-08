@@ -25,7 +25,6 @@ import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-round-scores-game',
-  standalone: true,
   imports: [
     TableModule,
     ReactiveFormsModule,

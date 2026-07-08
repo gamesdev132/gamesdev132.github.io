@@ -7,7 +7,6 @@ import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-title-card',
-  standalone: true,
   imports: [FaIconComponent, NgClass],
   templateUrl: './title-card.component.html',
   styleUrl: './title-card.component.scss',

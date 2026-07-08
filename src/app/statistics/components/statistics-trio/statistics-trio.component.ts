@@ -6,7 +6,6 @@ import { RatioData } from 'app/@shared/interface/ratio-data';
 
 @Component({
   selector: 'app-statistics-trio',
-  standalone: true,
   imports: [CardModule, PodiumComponent],
   templateUrl: './statistics-trio.component.html',
   styleUrl: './statistics-trio.component.scss',

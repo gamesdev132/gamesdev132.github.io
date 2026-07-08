@@ -13,7 +13,6 @@ import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-point-games',
-  standalone: true,
   imports: [CarouselModule, FontAwesomeModule, CardModule],
   templateUrl: './point-games.component.html',
   styleUrl: './point-games.component.scss',

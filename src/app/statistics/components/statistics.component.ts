@@ -14,7 +14,6 @@ import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
   selector: 'app-statistics',
-  standalone: true,
   imports: [
     CardModule,
     DropdownModule,

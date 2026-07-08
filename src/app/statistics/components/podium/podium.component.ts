@@ -3,7 +3,6 @@ import { RatioData } from 'app/@shared/interface/ratio-data';
 
 @Component({
   selector: 'app-podium',
-  standalone: true,
   imports: [],
   templateUrl: './podium.component.html',
   styleUrl: './podium.component.scss',

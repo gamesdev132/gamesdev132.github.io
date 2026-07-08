@@ -13,7 +13,6 @@ export enum ChartType {
 
 @Component({
   selector: 'app-trio',
-  standalone: true,
   imports: [ChartModule, DropdownModule, FormsModule],
   templateUrl: './trio.component.html',
   styleUrl: './trio.component.scss',
