@@ -9,16 +9,16 @@ import {
 import { TrioPlayer } from 'app/@shared/interface/trioPlayer';
 import { PlayersService } from 'app/@shared/services/players.service';
 import { TrioService } from 'app/@shared/services/trio.service';
-import { ConfirmationService, Message, MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
-import { InputSwitchModule } from 'primeng/inputswitch';
-import { MessagesModule } from 'primeng/messages';
 import { TrioGameHelper } from '../../helpers/trio-game.helper';
+import { ToggleSwitchModule } from 'primeng/toggleswitch';
+import { Message } from 'primeng/message';
+import { Select } from 'primeng/select';
 
 @Component({
   selector: 'app-trio-game',
@@ -27,12 +27,12 @@ import { TrioGameHelper } from '../../helpers/trio-game.helper';
     InputTextModule,
     ButtonModule,
     ReactiveFormsModule,
-    MessagesModule,
-    InputSwitchModule,
+    ToggleSwitchModule,
     ConfirmDialogModule,
     ToastModule,
     AutoCompleteModule,
-    DropdownModule,
+    Message,
+    Select,
   ],
   providers: [ConfirmationService, MessageService],
   templateUrl: './trio-game.component.html',
@@ -41,7 +41,7 @@ import { TrioGameHelper } from '../../helpers/trio-game.helper';
 export class TrioGameComponent implements OnInit {
   formHelper!: TrioGameHelper;
   playerList: string[] = [];
-  messages!: Message[];
+  messageText = '';
 
   constructor(
     private trioService: TrioService,
@@ -51,14 +51,10 @@ export class TrioGameComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.messages = [
-      {
-        severity: 'info',
-        detail: 'Il faut toujours enregistré les deux parties en mode Duo :)',
-      },
-    ];
+    this.messageText =
+      'Il faut toujours enregistré les deux parties en mode Duo :)';
     this.formHelper = new TrioGameHelper();
-    this.playersService.activePlayers.subscribe(players => {
+    this.playersService.activePlayers.subscribe((players) => {
       this.playerList = players;
     });
   }

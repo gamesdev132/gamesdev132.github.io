@@ -8,7 +8,7 @@
   <div formArrayName="players" class="players">
     @for (player of players.controls; let i = $index; track player) {
       <div class="player" [formGroupName]="i">
-        <p-dropdown
+        <p-select
           formControlName="name"
           placeholder="Nom du joueur"
           filter
@@ -46,17 +46,16 @@
   </div>
   @if (formHelper.isDuo()) {
     <div class="message">
-      <p-messages
-        [(value)]="messages"
-        [enableService]="false"
+      <p-message
+        severity="info"
         [closable]="false"
-      ></p-messages>
+      >{{ messageText }}</p-message>
     </div>
   }
   <div class="buttons">
     <div class="duo-switch">
       <label for="duoSwith" class="duo-switch__label">Duo</label>
-      <p-inputSwitch formControlName="isDuo" inputId="duoSwith" />
+      <p-toggleswitch formControlName="isDuo" inputId="duoSwith" />
     </div>
     <p-button
       icon="pi pi-save"

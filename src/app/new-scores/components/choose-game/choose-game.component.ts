@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 import { GameEnum } from 'app/@shared/enums/game.enum';
 import { PlayersService } from 'app/@shared/services/players.service';
 import { RoundScoresGameComponent } from 'app/new-scores/components/round-scores-game/round-scores-game.component';
-import { DropdownModule } from 'primeng/dropdown';
 import { TrioGameComponent } from '../trio-game/trio-game.component';
+import { Select } from 'primeng/select';
 
 @Component({
   selector: 'app-choose-game',
   imports: [
     CommonModule,
     FormsModule,
-    DropdownModule,
     TrioGameComponent,
     RoundScoresGameComponent,
+    Select,
   ],
   templateUrl: './choose-game.component.html',
   styleUrl: './choose-game.component.scss',

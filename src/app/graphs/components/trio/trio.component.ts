@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { TrioRatio } from 'app/@shared/interface/trioRatio';
 import { TrioService } from 'app/@shared/services/trio.service';
 import { ChartModule } from 'primeng/chart';
-import { DropdownModule } from 'primeng/dropdown';
+import { Select } from 'primeng/select';
 
 export enum ChartType {
   WON = 'Parties gagnées',
@@ -13,7 +13,7 @@ export enum ChartType {
 
 @Component({
   selector: 'app-trio',
-  imports: [ChartModule, DropdownModule, FormsModule],
+  imports: [ChartModule, FormsModule, Select],
   templateUrl: './trio.component.html',
   styleUrl: './trio.component.scss',
 })

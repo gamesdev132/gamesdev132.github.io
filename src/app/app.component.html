@@ -16,10 +16,11 @@
   <router-outlet />
   @if (showAddButton) {
     <a
+      pButton
       [routerLink]="'/scores/new'"
-      class="pi pi-plus p-button p-button-icon add-button"
+      icon="pi pi-plus"
       title="Enregistrer des scores"
-    >
-    </a>
+      class="add-button"
+    ></a>
   }
 </main>

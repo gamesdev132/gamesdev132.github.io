@@ -18,17 +18,17 @@ import { RoundScoresGameHelper } from 'app/new-scores/helpers/round-scores-game.
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Button } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-round-scores-game',
   imports: [
     TableModule,
     ReactiveFormsModule,
-    DropdownModule,
+    SelectModule,
     InputNumberModule,
     Button,
     ConfirmDialogModule,

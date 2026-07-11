@@ -5,6 +5,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { environment } from '../environments/environment';
 import { routes } from './app.routes';
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeng/themes/aura';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,5 +15,13 @@ export const appConfig: ApplicationConfig = {
     provideFirestore(() => getFirestore(getApp())),
     provideRouter(routes),
     provideAnimations(),
+    providePrimeNG({
+      theme: {
+        preset: Aura,
+        options: {
+          darkModeSelector: false,
+        },
+      },
+    }),
   ],
 };

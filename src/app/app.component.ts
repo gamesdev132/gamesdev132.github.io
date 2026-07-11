@@ -1,11 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import {
+  Router,
+  RouterLink,
+  RouterLinkActive,
+  RouterOutlet,
+} from '@angular/router';
 import { MegaMenuItem } from 'primeng/api';
 import { MegaMenuModule } from 'primeng/megamenu';
+import { ButtonDirective } from 'primeng/button';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MegaMenuModule],
+  imports: [
+    RouterOutlet,
+    MegaMenuModule,
+    RouterLink,
+    RouterLinkActive,
+    ButtonDirective,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

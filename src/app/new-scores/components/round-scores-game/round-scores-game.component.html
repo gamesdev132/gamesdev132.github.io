@@ -25,7 +25,7 @@
     <ng-template pTemplate="body" let-player let-i="rowIndex">
       <tr [formGroup]="player">
         <td pFrozenColumn>
-          <p-dropdown
+          <p-select
             formControlName="name"
             placeholder="Nom du joueur"
             showClear
@@ -42,8 +42,8 @@
               [formControl]="pointControl"
               placeholder="Points"
               [inputStyle]="{ width: '72px' }"
-              max="1000"
-              min="-7"
+              [max]="1000"
+              [min]="-7"
               (onBlur)="updatePlayerTotal(i)"
             />
           </td>

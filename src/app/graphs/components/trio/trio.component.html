@@ -1,11 +1,11 @@
 <div class="trio-stats">
   <h2>Trio</h2>
-  <p-dropdown
+  <p-select
     [options]="chartTypes"
     [(ngModel)]="selectedChartType"
     (onChange)="setChar()"
     [style]="{ width: '280px' }"
-  ></p-dropdown>
+  ></p-select>
 </div>
 <div class="chart">
   <p-chart

@@ -5,7 +5,6 @@ import { TrioRatio } from 'app/@shared/interface/trioRatio';
 import { GamePointsService } from 'app/@shared/services/game-points.service';
 import { TrioService } from 'app/@shared/services/trio.service';
 import { CardModule } from 'primeng/card';
-import { DropdownModule } from 'primeng/dropdown';
 import { StatisticsPointGamesComponent } from './statistics-point-games/statistics-point-games.component';
 import { StatisticsTrioComponent } from './statistics-trio/statistics-trio.component';
 import { GameEnum } from 'app/@shared/enums/game.enum';
@@ -16,7 +15,6 @@ import { SkeletonModule } from 'primeng/skeleton';
   selector: 'app-statistics',
   imports: [
     CardModule,
-    DropdownModule,
     FormsModule,
     StatisticsPointGamesComponent,
     StatisticsTrioComponent,
