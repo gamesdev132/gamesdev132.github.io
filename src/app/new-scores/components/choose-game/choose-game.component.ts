@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { GameEnum } from 'app/@shared/enums/game.enum';
 import { PlayersService } from 'app/@shared/services/players.service';
@@ -9,13 +9,7 @@ import { Select } from 'primeng/select';
 
 @Component({
   selector: 'app-choose-game',
-  imports: [
-    CommonModule,
-    FormsModule,
-    TrioGameComponent,
-    RoundScoresGameComponent,
-    Select,
-  ],
+  imports: [FormsModule, TrioGameComponent, RoundScoresGameComponent, Select],
   templateUrl: './choose-game.component.html',
   styleUrl: './choose-game.component.scss',
 })
