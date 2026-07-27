@@ -10,6 +10,14 @@
       display: flex;
       justify-content: space-around;
     }
+
+    &__name-column {
+      z-index: 2;
+    }
+
+    &__point-column {
+      z-index: 1;
+    }
   }
 
   td {

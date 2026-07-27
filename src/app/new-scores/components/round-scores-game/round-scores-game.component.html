@@ -24,7 +24,7 @@
 
     <ng-template pTemplate="body" let-player let-i="rowIndex">
       <tr [formGroup]="player">
-        <td pFrozenColumn>
+        <td pFrozenColumn class="round-scores__name-column">
           <p-select
             formControlName="name"
             placeholder="Nom du joueur"
@@ -37,7 +37,7 @@
         </td>
 
         @for (pointControl of getPoints(i); track pointControl) {
-          <td>
+          <td class="round-scores__point-column">
             <p-inputNumber
               [formControl]="pointControl"
               placeholder="Points"
